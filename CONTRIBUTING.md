@@ -1,4 +1,3 @@
-
 # Team Norms
 * We will typically not meet in-person, but will use video conferencing for working with fast communication
 
