@@ -5,10 +5,11 @@
 ## Statement
 Our team is aiming for at minimum a functioning app that gathers prices from different meal delivery apps (data might be dummy data), displays different meal delivery options,redirecting the user to their preferred option.
 
+
 ## Themes
 
 * Get Data
-	* Scrape data manually or access api's from 
+	* Scrape data manually or access from api's 
 * Show options
 	* Display prices of different options for a meal from the different meal service apps
 * Database
@@ -26,6 +27,7 @@ Our team is aiming for at minimum a functioning app that gathers prices from dif
 
 # History
 * We are all college students who use meal delivery apps and wanted a way to find the best prices
+* For collaboration https://github.com/software-students-fall2021/project-setup-xinhua-coherent-compfood/blob/master/CONTRIBUTING.md
 # Instructions for building and testing 
 * TBD
 # Links
