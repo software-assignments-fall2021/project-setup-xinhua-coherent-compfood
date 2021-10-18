@@ -29,6 +29,6 @@ Our team is aiming for at minimum a functioning app that gathers prices from dif
 # History
 * We are all college students who use meal delivery apps and wanted a way to find the best prices
 # Instructions for building and testing 
-* n/a
+* TBD
 # Links
-* To be decided
+* TBD
