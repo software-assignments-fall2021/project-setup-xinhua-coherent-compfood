@@ -22,7 +22,6 @@ Our team is aiming for at minimum a functioning app that gathers prices from dif
 * Ermias Berhane Merine https://github.com/ErmiasMerine
 * Ryeem Zia https://github.com/RyeemZia
 * Phillip Chae https://github.com/phillipcheesesteak
-* Linjian Li https://github.com/forestlake233
 * Minsu Seo https://github.com/seocahtoa
 
 # History
