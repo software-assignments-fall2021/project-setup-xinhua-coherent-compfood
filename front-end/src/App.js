@@ -1,25 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import {useState, useEffect} from "react";
+import {BrowserRouter, Switch, Route, Link} from "react-router-dom";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import App_selector_screen from "./App_selector_screen";
+import Header from "./Header";
+import Home_screen from "./Home_screen";
+import Order_screen from "./Order_screen";
+import Restaurant_screen from "./Restaurant_screen";
+
+import "./App.css";
+
+let App = (props) => {
+	return (
+		<div>
+			<Header />
+
+			<BrowserRouter>
+				<Switch>
+					{//restaurant screen
+					}
+					<Route path="/restaurant/:order_id" component={Restaurant_screen} />
+
+					{//app selector screen
+					}
+					<Route path="/delivery/:order_id" component={App_selector_screen} />
+
+					{//processing order screen
+					}
+					<Route path="/processing/:order_id" component={Order_screen} />
+
+					{//home screen
+					}
+					<Route path="/">
+						<Home_screen />
+					</Route>
+				</Switch>
+			</BrowserRouter>
+		</div>
+	);
 }
 
 export default App;
