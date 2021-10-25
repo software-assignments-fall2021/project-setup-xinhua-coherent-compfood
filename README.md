@@ -48,7 +48,7 @@ cd $(git root)/front-end
 npm install
 ```
 
-3. launch React server (with PR #15, will be accessable at [http://127.0.0.1:61002](http://127.0.0.1:61002))
+3. launch React server (accessable at [http://127.0.0.1:61002](http://127.0.0.1:61002))
 
 ```
 npm start
