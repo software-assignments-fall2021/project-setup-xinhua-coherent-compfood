@@ -1,0 +1,17 @@
+.relative-pos{
+	position: relative;
+}
+
+.absolute-pos-bar{
+	height: 0.1px;
+}
+
+.slide-left{
+	position: absolute;
+	left: 0px;
+}
+
+.slide-right{
+	position: absolute;
+	right: 0px;
+}
