@@ -11,9 +11,9 @@ let Restaurant = (props) => {
 	return (
 		<div>
 			<p className="p">{props.name}</p>
-			<p className="p"> Description TODO</p>
-			<p className="p">Hours: TODO</p>
-			<p className="p">Distance: TODO</p>
+			<p className="p">Description: {props.description}</p>
+			<p className="p">Hours: {props.hours}</p>
+			<p className="p">Address: {props.location}</p>
 			<a className="go" href={`/restaurant/${generate_order_id()}`}>GO</a>
 		</div>
 	);

@@ -6,8 +6,8 @@ let Menu_item = (props) => {
 	return (
 		<div>
 			<p className="p">{props.name}</p>
-			<p className="p">Description TODO</p>
-			<p className="p">Price: TODO</p>
+			<p className="p">Description: {props.description}</p>
+			<p className="p">Price: {props.price}</p>
 		</div>
 	);
 };
