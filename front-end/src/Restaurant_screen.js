@@ -3,6 +3,7 @@ import {BrowserRouter, Switch, Route, Link} from "react-router-dom";
 
 import Menu_item from "./Menu_item";
 
+
 let Restaurant_screen = (props) => {
 	let menu_items = [];
 	for (let i = 0; i < 50; ++i){
@@ -18,7 +19,7 @@ let Restaurant_screen = (props) => {
 		<div>
 		<p>Restaurant screen</p>
 		{menu_items}
-		<a href={`/delivery/${get_order_id()}`}>FIND APP</a>
+		<a className="go"href={`/delivery/${get_order_id()}`}>FIND APP</a>
 		</div>
 	);
 };
