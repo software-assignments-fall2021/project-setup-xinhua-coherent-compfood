@@ -4,9 +4,9 @@ import {BrowserRouter, Switch, Route, Link} from "react-router-dom";
 let Menu_item = (props) => {
 	return (
 		<div>
-			<p>{props.name}</p>
-			<p>Description: {props.description}</p>
-			<p>Price: {props.price}</p>
+			<p className="p">{props.name}</p>
+			<p className="p">Description: {props.description}</p>
+			<p className="p">Price: {props.price}</p>
 		</div>
 	);
 };
