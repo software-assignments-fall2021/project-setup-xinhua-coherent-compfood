@@ -9,6 +9,7 @@ let Restaurant = (props) => {
 
 	return (
 		<div>
+			<img src="https://picsum.photos/200/100" alt = "Lorem Picsum">
 			<p>{props.name}</p>
 			<p>Description: {props.description}</p>
 			<p>Hours: {props.hours}</p>
