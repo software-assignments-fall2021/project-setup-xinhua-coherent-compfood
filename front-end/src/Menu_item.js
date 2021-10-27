@@ -1,6 +1,5 @@
 import {useState, useEffect} from "react";
 import {BrowserRouter, Switch, Route, Link} from "react-router-dom";
-import "./Menu_item.css";
 
 let Menu_item = (props) => {
 	return (

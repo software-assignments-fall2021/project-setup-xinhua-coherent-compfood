@@ -1,6 +1,5 @@
 import {useState, useEffect} from "react";
 import {BrowserRouter, Switch, Route, Link} from "react-router-dom";
-import "./Restaurant.css";
 
 let Restaurant = (props) => {
 	let generate_order_id = () => {
