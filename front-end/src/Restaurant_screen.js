@@ -4,7 +4,6 @@ import {BrowserRouter, Switch, Route, Link} from "react-router-dom";
 
 import Menu_item from "./Menu_item";
 
-
 let Restaurant_screen = (props) => {
 	//MAGIC 12-46 items per restaurant
 	let num_menu_items = 12 + Math.floor(Math.random() * 35);
@@ -41,7 +40,7 @@ let Restaurant_screen = (props) => {
 		<div>
 		<p>Restaurant screen</p>
 		{menu_items}
-		<a className="go"href={`/delivery/${get_order_id()}`}>FIND APP</a>
+		<a href={`/delivery/${get_order_id()}`}>FIND APP</a>
 		</div>
 	);
 };
