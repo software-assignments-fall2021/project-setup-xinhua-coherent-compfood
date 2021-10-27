@@ -10,8 +10,8 @@ let Delivery_app = (props) => {
 	return (
 		<div>
 			<p>{props.name}</p>
-			<p>Total: TODO</p>
-			<p>Estimated time to deliver: TODO</p>
+			<p>Total: {props.price}</p>
+			<p>Estimated time to deliver: {props.time}</p>
 			<a href={`/processing/${get_order_id()}`}>ORDER</a>
 		</div>
 	);

@@ -10,9 +10,9 @@ let Restaurant = (props) => {
 	return (
 		<div>
 			<p>{props.name}</p>
-			<p>Description TODO</p>
-			<p>Hours: TODO</p>
-			<p>Distance: TODO</p>
+			<p>Description: {props.description}</p>
+			<p>Hours: {props.hours}</p>
+			<p>Address: {props.location}</p>
 			<a href={`/restaurant/${generate_order_id()}`}>GO</a>
 		</div>
 	);
