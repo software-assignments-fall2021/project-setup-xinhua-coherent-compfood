@@ -10,11 +10,11 @@ let Restaurant = (props) => {
 	return (
 		<div>
 			<img src="https://picsum.photos/200/100" alt = "Lorem Picsum">
-			<p>{props.name}</p>
-			<p>Description: {props.description}</p>
-			<p>Hours: {props.hours}</p>
-			<p>Address: {props.location}</p>
-			<a href={`/restaurant/${generate_order_id()}`}>GO</a>
+			<p className="p">{props.name}</p>
+			<p className="p">Description: {props.description}</p>
+			<p className="p">Hours: {props.hours}</p>
+			<p className="p">Address: {props.location}</p>
+			<a className="go" href={`/restaurant/${generate_order_id()}`}>GO</a>
 		</div>
 	);
 };

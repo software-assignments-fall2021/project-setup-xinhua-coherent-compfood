@@ -5,9 +5,9 @@ let Menu_item = (props) => {
 	return (
 		<div>
 			<img src="https://picsum.photos/200/100" alt="Lorem Picsum">
-			<p>{props.name}</p>
-			<p>Description: {props.description}</p>
-			<p>Price: {props.price}</p>
+			<p className="p">{props.name}</p>
+			<p className="p">Description: {props.description}</p>
+			<p className="p">Price: {props.price}</p>
 		</div>
 	);
 };
