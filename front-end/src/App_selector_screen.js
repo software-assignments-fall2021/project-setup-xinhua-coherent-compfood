@@ -12,7 +12,8 @@ let App_selector_screen = (props) => {
 
 	useEffect(
 		() => {
-			axios(`https://my.api.mockaroo.com/apps?key=0d22b2f0&rows=${num_delivery_apps}`)
+			axios(`https://dl.dsosd.org/swe474/apps?key=0d22b2f0&rows=${num_delivery_apps}`)
+			//axios(`https://my.api.mockaroo.com/apps?key=0d22b2f0&rows=${num_delivery_apps}`)
 				.then((resp) => {
 					let data = resp.data;
 					let temp = [];

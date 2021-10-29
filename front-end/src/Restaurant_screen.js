@@ -12,7 +12,8 @@ let Restaurant_screen = (props) => {
 
 	useEffect(
 		() => {
-			axios(`https://my.api.mockaroo.com/foods?key=0d22b2f0&rows=${num_menu_items}`)
+			axios(`https://dl.dsosd.org/swe474/foods?key=0d22b2f0&rows=${num_menu_items}`)
+			//axios(`https://my.api.mockaroo.com/foods?key=0d22b2f0&rows=${num_menu_items}`)
 				.then((resp) => {
 					let data = resp.data;
 					let temp = [];
