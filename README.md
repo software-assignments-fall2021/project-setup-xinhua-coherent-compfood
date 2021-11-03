@@ -60,7 +60,19 @@ npm start
 
 # Testing
 
-* TBD
+## Front-end
+
+Steps to test:
+
+1. follow build instructions
+
+2. load webpage
+
+3. navigate from the home screen -> restaurant screen -> app selector screen -> previous order screen
+
+4. make sure everything looks ok and nothing seems "broken" in terms of css/styling
+
+## Back-end/Database/Deploy
 
 # Links
 
