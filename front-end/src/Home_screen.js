@@ -13,8 +13,6 @@ let Home_screen = (props) => {
 	useEffect(
 		() => {
 			axios(`${process.env.REACT_APP_api_base_url}/restaurants?rows=${num_restaurants}`)
-			//axios(`https://dl.dsosd.org/swe474/restaurants?key=0d22b2f0&rows=${num_restaurants}`)
-			//axios(`https://my.api.mockaroo.com/restaurants?key=0d22b2f0&rows=${num_restaurants}`)
 				.then((resp) => {
 					let data = resp.data;
 					let temp = [];
