@@ -1,5 +1,6 @@
 let axios = require("axios");
 let express = require("express");
+let fs = require("fs/promises");
 let morgan = require("morgan");
 
 //dotenv loading .env
@@ -27,5 +28,25 @@ server.get("/", (req, resp) => {
 	return resp.json(data);
 });
 
+server.get("/apps", async (req, resp) => {
+	let data = JSON.parse(await fs.readFile("./data/apps"));
+	resp.set("Access-Control-Allow-Origin", process.env.client_base_url);
+
+	return resp.json(data);
+});
+
+server.get("/foods", async (req, resp) => {
+	let data = JSON.parse(await fs.readFile("./data/foods"));
+	resp.set("Access-Control-Allow-Origin", process.env.client_base_url);
+
+	return resp.json(data);
+});
+
+server.get("/restaurants", async (req, resp) => {
+	let data = JSON.parse(await fs.readFile("./data/restaurants"));
+	resp.set("Access-Control-Allow-Origin", process.env.client_base_url);
+
+	return resp.json(data);
+});
 
 module.exports = server;
