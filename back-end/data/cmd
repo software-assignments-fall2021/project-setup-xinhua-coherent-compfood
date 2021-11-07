@@ -1,0 +1,3 @@
+cat apps | jq '[.[] | {id: .id, name: .name, time: .time, price: .price}]' >new_apps
+cat foods | jq '[.[] | {id: .id, name: .name, description: .description, price: .price}]' >new_foods
+cat restaurants | jq '[.[] | {id: .id, name: .name, description: .description, hour_start: .hour_start, hour_end: .hour_end, location: .location}]' >new_restaurants
