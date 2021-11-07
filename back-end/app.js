@@ -27,5 +27,15 @@ server.get("/", (req, resp) => {
 	return resp.json(data);
 });
 
+server.get("/foods", (req, resp) => {
+	let data = [
+		{
+			"name": "Farook's",
+			"description": "The best halal you will have in your life"
+		}
+	];
+
+	return resp.json(data);
+});
 
 module.exports = server;
