@@ -80,7 +80,7 @@ npm start
 
 * TBD
 
-# Testing (written for code after #46 and #47 are merged)
+# Testing
 
 ## Front-end
 
