@@ -10,5 +10,6 @@ let server = app.listen(listen_port, listen_addr, () => {
 module.exports = {
 	stop: () => {
 		server.close();
-	}
+	},
+	base_url: `http://${listen_addr}:${listen_port}`
 };
