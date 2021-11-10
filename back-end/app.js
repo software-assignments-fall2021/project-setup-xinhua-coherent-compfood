@@ -49,4 +49,10 @@ server.get("/restaurants", async (req, resp) => {
 	return resp.json(data);
 });
 
+server.get("/orders", async (req,resp) => {
+	let data = JSON.parse(await fs.readFile("./data/orders.json"));
+	resp.set("Access-Control-Allow-Origin", process.env.client_base_url);
+	return resp.json(data);
+});
+
 module.exports = server;
