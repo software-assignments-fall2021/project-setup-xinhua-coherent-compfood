@@ -2,6 +2,7 @@ import axios from "axios";
 import {useState, useEffect} from "react";
 import {BrowserRouter, Switch, Route, Link} from "react-router-dom";
 
+import config from "./config";
 import Delivery_app from "./Delivery_app";
 
 let App_selector_screen = (props) => {
@@ -12,7 +13,7 @@ let App_selector_screen = (props) => {
 
 	useEffect(
 		() => {
-			axios(`${process.env.REACT_APP_api_base_url}/apps?rows=${num_delivery_apps}`)
+			axios(`${config.backend_base_url}/apps?rows=${num_delivery_apps}`)
 				.then((resp) => {
 					let data = resp.data;
 					let temp = [];
