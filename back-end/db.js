@@ -6,7 +6,7 @@ const User = new mongoose.Schema({
 
 mongoose.model('User', User);
 
-const MONGODB_URI = 'mongodb+srv://Stein:SoulEater@anianidb.wrcau.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
+const MONGODB_URI = 'mongodb+srv://swe474.bimfy.mongodb.net/swe474'
 
  mongoose.connect(MONGODB_URI  || 'mongodb://localhost/compfood', {
        useNewUrlParser: true,
