@@ -1,6 +1,8 @@
 import {useState, useEffect} from "react";
 import {BrowserRouter, Switch, Route, Link} from "react-router-dom";
 
+import config from "./config";
+
 let Restaurant = (props) => {
 	let generate_order_id = () => {
 		//TODO actually generate a unique id each time and sync with backend
@@ -9,7 +11,7 @@ let Restaurant = (props) => {
 
 	return (
 		<div>
-			<img src={`${process.env.REACT_APP_api_base_url}/static/restaurant.jpg`} alt="Random restaurant screen" />
+			<img src={`${config.backend_base_url}/static/restaurant.jpg`} alt="Random restaurant screen" />
 			<p className="p">{props.name}</p>
 			<p className="p">Description: {props.description}</p>
 			<p className="p">Hours: {props.hours}</p>

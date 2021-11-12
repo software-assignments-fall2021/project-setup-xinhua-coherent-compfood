@@ -2,6 +2,7 @@ import axios from "axios";
 import {useState, useEffect} from "react";
 import {BrowserRouter, Switch, Route, Link} from "react-router-dom";
 
+import config from "./config";
 import Restaurant from "./Restaurant";
 
 let Home_screen = (props) => {
@@ -12,7 +13,7 @@ let Home_screen = (props) => {
 
 	useEffect(
 		() => {
-			axios(`${process.env.REACT_APP_api_base_url}/restaurants?rows=${num_restaurants}`)
+			axios(`${config.backend_base_url}/restaurants?rows=${num_restaurants}`)
 				.then((resp) => {
 					let data = resp.data;
 					let temp = [];
