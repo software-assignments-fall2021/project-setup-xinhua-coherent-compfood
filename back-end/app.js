@@ -65,7 +65,7 @@ server.post('/login', (req, res) => {
                     });
                 }
                 else{
-                    res.render('error');
+                    res.render('error', {message: 'Incorrect login credentials'});
                 }
             });
     	}
