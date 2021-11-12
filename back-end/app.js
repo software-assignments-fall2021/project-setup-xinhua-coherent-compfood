@@ -106,7 +106,7 @@ server.post('/register', (req, res) => {
         for(let i = 0; i < result.length; i++){
             if(req.body.username === result[i].username){
                 flag = 1;
-                res.render('error');
+                res.render('error', {message: 'Username must be more than 8 characters' });
             }
         } 
         
