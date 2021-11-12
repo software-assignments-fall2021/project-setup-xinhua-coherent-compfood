@@ -5,4 +5,10 @@ const User = new mongoose.Schema({
 });
 
 mongoose.model('User', User);
-mongoose.connect('mongodb://localhost/compfood');
+
+const MONGODB_URI = 'mongodb+srv://Stein:SoulEater@anianidb.wrcau.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
+
+ mongoose.connect(MONGODB_URI  || 'mongodb://localhost/compfood', {
+       useNewUrlParser: true,
+       useUnifiedTopology: true
+});
