@@ -113,7 +113,7 @@ server.post('/register', (req, res) => {
         if(req.body.password.length < 8){
             if(flag === 0){
                 flag = 1;
-                res.render('error');
+                res.render('error', {message: 'Password must be 8+ characters long'});
             }
         }
 
