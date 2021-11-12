@@ -1,8 +1,8 @@
 let axios = require("axios");
-//let express = require("express");
+let express = require("express");
+let fs = require("fs/promises");
 let morgan = require("morgan");
 
-const express = require('express');
 const bcrypt = require('bcryptjs');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -10,32 +10,44 @@ const session = require('express-session');
 
 require('./db');
 
-const app = express();
+require("dotenv").config({
+	silent: true
+});
 
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(session({
+let server = express();
+
+//print request info
+server.use(morgan("dev"));
+//parse json bodies
+server.use(express.json());
+
+//static directory is accessible as /static/ and loads files from ./public
+server.use("/static/", express.static("./public/"));
+
+server.use(bodyParser.urlencoded({extended: true}));
+server.use(session({
     secret: 'add session secret here',
     resave: false,
     saveUninitialized: true,
 }));
 
-app.set('view engine', 'hbs');
+server.set('view engine', 'hbs');
 
 const User = mongoose.model('User');
 
-app.get('/', (req, res) => {
+server.get('/', (req, res) => {
     res.render('index', {user: req.session.user, home: true});
 });
 
-app.get('/login', (req, res) => {
+server.get('/login', (req, res) => {
     res.render('login');
 });
 
-app.get('/register', (req, res) => {
+server.get('/register', (req, res) => {
   res.render('register');
 });
 
-app.post('/login', (req, res) => {
+server.post('/login', (req, res) => {
     // TODO: implement login
     User.findOne({username: req.body.username}, (err, user) => {
         if (!err && user) {
@@ -50,21 +62,42 @@ app.post('/login', (req, res) => {
                         console.log('error'); 
                         res.send('an error occurred, please see the server logs for more information');
                         }
-                      });
+                    });
                 }
                 else{
                     res.render('error');
                 }
-              });
-    }
-    else{
-        res.render('error');
-    }
-    });
-
+            });
+    	}
+    	else{
+        	res.render('error');
+    	}
+	});
 });
 
-app.post('/register', (req, res) => {
+server.get("/apps", async (req, resp) => {
+	let data = JSON.parse(await fs.readFile("./data/new_apps"));
+	resp.set("Access-Control-Allow-Origin", process.env.client_base_url);
+
+	return resp.json(data);
+});
+
+server.get("/foods", async (req, resp) => {
+	let data = JSON.parse(await fs.readFile("./data/new_foods"));
+	resp.set("Access-Control-Allow-Origin", process.env.client_base_url);
+
+	return resp.json(data);
+});
+
+server.get("/restaurants", async (req, resp) => {
+	let data = JSON.parse(await fs.readFile("./data/new_restaurants"));
+	resp.set("Access-Control-Allow-Origin", process.env.client_base_url);
+
+	return resp.json(data);
+});
+
+
+server.post('/register', (req, res) => {
     // TODO: implement registration
     let flag = 0;
     
@@ -101,7 +134,7 @@ app.post('/register', (req, res) => {
                     res.send('an error occurred, please see the server logs for more information');
                     }
                   });
-                user.save(() => {  
+                user.save(() => { 
                     res.redirect('/');	
                 });
             });
@@ -109,4 +142,4 @@ app.post('/register', (req, res) => {
     });
 });
     
-app.listen(3000);
+module.exports = server;

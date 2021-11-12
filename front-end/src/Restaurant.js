@@ -9,7 +9,7 @@ let Restaurant = (props) => {
 
 	return (
 		<div>
-			<img src="https://picsum.photos/200/100" alt = "Lorem Picsum" />
+			<img src={`${process.env.REACT_APP_api_base_url}/static/restaurant.jpg`} alt="Random restaurant screen" />
 			<p className="p">{props.name}</p>
 			<p className="p">Description: {props.description}</p>
 			<p className="p">Hours: {props.hours}</p>

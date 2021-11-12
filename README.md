@@ -22,7 +22,7 @@ Our team is aiming for at minimum a functioning app that gathers prices from dif
 * Andy Huang https://github.com/huang-a
 * Ermias Berhane Merine https://github.com/ErmiasMerine
 * Ryeem Zia https://github.com/RyeemZia
-* Phillip Chae https://github.com/phillipcheesesteak
+* Phillip Chae https://github.com/phillip-chae
 * Minsu Seo https://github.com/seocahtoa
 
 # History
@@ -54,7 +54,29 @@ npm install
 npm start
 ```
 
-## Back-end/Database/Deploy
+## Back-end
+
+We are using `npm` as our package manager and Express as our framework. Steps to run:
+
+1. cd to the back-end directory
+
+```
+cd $(git root)/back-end
+```
+
+2. install relevant packages
+
+```
+npm install
+```
+
+3. launch Express server (accessable at [http://127.0.0.1:61001](http://127.0.0.1:61001))
+
+```
+npm start
+```
+
+## Database/Deploy
 
 * TBD
 
@@ -64,7 +86,7 @@ npm start
 
 Steps to test:
 
-1. follow build instructions
+1. follow build instructions for both front-end and back-end
 
 2. load webpage
 
@@ -72,7 +94,19 @@ Steps to test:
 
 4. make sure everything looks ok and nothing seems "broken" in terms of css/styling
 
-## Back-end/Database/Deploy
+## Back-end
+
+Steps to test:
+
+1. follow build instructions for back-end
+
+2. run `npm run test-only` in the back-end directory for unit testing
+
+3. run `npm run test-cov` in the back-end directory for code coverage (+ unit testing)
+
+## Database/Deploy
+
+* TBD
 
 # Links
 
