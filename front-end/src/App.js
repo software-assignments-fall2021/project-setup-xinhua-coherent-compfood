@@ -9,7 +9,7 @@ import Restaurant_screen from "./Restaurant_screen";
 import SignUp from "./signUp";
 import SignIn from "./signIn";
 
-import "./App.css";
+import "./all.css";
 
 let App = (props) => {
 	return (

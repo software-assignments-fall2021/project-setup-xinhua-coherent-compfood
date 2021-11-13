@@ -1,6 +1,7 @@
 import {useState, useEffect} from "react";
 import {BrowserRouter, Switch, Route, Link} from "react-router-dom";
-import "./Delivery_app.css";
+
+import "./all.css";
 
 let Delivery_app = (props) => {
 	let get_order_id = () => {
