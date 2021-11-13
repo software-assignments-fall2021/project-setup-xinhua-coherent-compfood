@@ -9,6 +9,7 @@
 }
 
 .go {
+	text-decoration: none;
 	width: 50px;
 	border: 1px solid rgb(238, 124, 31);
 	padding: 1px;
