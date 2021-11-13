@@ -1,7 +1,11 @@
+#root {
+	width: 90vw;
+	padding: 0px 5vw;
+}
+
 .p {
 	color: rgb(0, 0, 0);
 	margin: 5px;
-	background-color: rgb(151, 198, 216);
 }
 
 .go {
@@ -11,11 +15,14 @@
 	margin: 1px;
 	color: rgb(0, 0, 0);
 	background-color: orange;
+	font-size: 1.5em;
 }
 
 div {
 	list-style-type: circle;
+	/*
 	border: 0.5px solid rgb(255, 255, 255);
+	*/
 	background-color: rgb(255, 255, 255);
 }
 
@@ -35,4 +42,40 @@ div {
 .slide-right {
 	position: absolute;
 	right: 0px;
+}
+
+.boxify {
+	padding: 1.5em;
+	margin: 1em 0em;
+	border: 1px black dashed;
+	border-radius: 2em;
+	background-color: lightgray;
+}
+
+.restaurant-card {
+	position: relative;
+	background-color: inherit;
+}
+
+.restaurant-card > img {
+	width: 100px;
+	height: 100px;
+
+	position: absolute;
+	right: 0px;
+}
+
+.restaurant-card > p:nth-of-type(1) {
+	display: inline;
+	font-size: 2em;
+	font-style: italic;
+}
+
+.restaurant-card > p:nth-of-type(3) {
+	font-size: 1.15em;
+}
+
+.restaurant-card > .go {
+	margin-left: 1em;
+	display: inline;
 }

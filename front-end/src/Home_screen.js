@@ -34,8 +34,8 @@ let Home_screen = (props) => {
 
 	return (
 		<div>
-		<p>Home screen</p>
-		{restaurants}
+			<h2>Restaurants near you</h2>
+			{restaurants}
 		</div>
 	);
 };
