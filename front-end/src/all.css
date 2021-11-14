@@ -54,29 +54,30 @@ div {
 }
 
 .restaurant-card {
-	position: relative;
+	display: flex;
 	background-color: inherit;
 }
 
 .restaurant-card > img {
 	width: 100px;
 	height: 100px;
-
-	position: absolute;
-	right: 0px;
 }
 
-.restaurant-card > p:nth-of-type(1) {
+.restaurant-card > div {
+	background-color: inherit;
+}
+
+.restaurant-card > div > p:nth-of-type(1) {
 	display: inline;
 	font-size: 2em;
 	font-style: italic;
 }
 
-.restaurant-card > p:nth-of-type(3) {
+.restaurant-card > div > p:nth-of-type(3) {
 	font-size: 1.15em;
 }
 
-.restaurant-card > .go {
+.restaurant-card > div > .go {
 	margin-left: 1em;
 	display: inline;
 }
