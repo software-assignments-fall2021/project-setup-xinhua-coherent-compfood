@@ -80,3 +80,46 @@ div {
 	margin-left: 1em;
 	display: inline;
 }
+
+.menu-item-card {
+	background-color: inherit;
+	display: flex;
+}
+
+.menu-item-card > img {
+	width: 100px;
+	height: 100px;
+}
+
+.menu-item-card > div {
+	background-color: inherit;
+}
+
+.menu-item-card > div > p:nth-of-type(1) {
+	display: inline;
+	font-size: 2em;
+	font-style: italic;
+}
+
+.menu-item-card > div > p:nth-of-type(2) {
+	display: inline;
+	font-size: 1.15em;
+}
+
+.menu-item-card > div > .go {
+	margin-left: 1em;
+	display: inline;
+}
+
+.proxy-select {
+	display: none;
+}
+
+.proxy-select:checked + .proxy-item {
+	background-color: #c3c3c3;
+	box-shadow: 4px 4px lightgray;
+}
+
+.flex-divider {
+	flex-grow: 1;
+}
