@@ -39,7 +39,7 @@ let Restaurant_screen = (props) => {
 
 	return (
 		<div>
-		<p>Restaurant screen</p>
+		<h2>Menu</h2>
 		{menu_items}
 		<a href={`/delivery/${get_order_id()}`}>FIND APP</a>
 		</div>
