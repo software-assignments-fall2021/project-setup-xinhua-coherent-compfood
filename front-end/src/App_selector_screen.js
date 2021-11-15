@@ -34,7 +34,7 @@ let App_selector_screen = (props) => {
 
 	return (
 		<div>
-		<p>App selector screen</p>
+		<h2>Apps available</h2>
 		{delivery_apps}
 		</div>
 	);

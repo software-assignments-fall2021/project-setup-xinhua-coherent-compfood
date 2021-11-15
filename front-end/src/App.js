@@ -7,7 +7,7 @@ import Home_screen from "./Home_screen";
 import Order_screen from "./Order_screen";
 import Restaurant_screen from "./Restaurant_screen";
 
-import "./App.css";
+import "./all.css";
 
 let App = (props) => {
 	return (
