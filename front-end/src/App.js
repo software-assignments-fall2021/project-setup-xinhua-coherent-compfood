@@ -1,11 +1,11 @@
 import {useState, useEffect} from "react";
 import {BrowserRouter, Switch, Route, Link} from "react-router-dom";
 
-import App_selector_screen from "./App_selector_screen";
-import Header from "./Header";
-import Home_screen from "./Home_screen";
-import Order_screen from "./Order_screen";
-import Restaurant_screen from "./Restaurant_screen";
+import App_selector_screen from "./screen/App_selector_screen";
+import Header from "./component/Header";
+import Home_screen from "./screen/Home_screen";
+import Order_screen from "./screen/Order_screen";
+import Restaurant_screen from "./screen/Restaurant_screen";
 
 import "./all.css";
 

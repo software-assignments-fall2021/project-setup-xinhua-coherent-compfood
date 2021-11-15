@@ -2,8 +2,8 @@ import axios from "axios";
 import {useState, useEffect} from "react";
 import {BrowserRouter, Switch, Route, Link} from "react-router-dom";
 
-import config from "./config";
-import Menu_item from "./Menu_item";
+import config from "../config";
+import Menu_item from "../component/Menu_item";
 
 let Restaurant_screen = (props) => {
 	//MAGIC 12-46 items per restaurant
