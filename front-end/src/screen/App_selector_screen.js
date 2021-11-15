@@ -2,8 +2,8 @@ import axios from "axios";
 import {useState, useEffect} from "react";
 import {BrowserRouter, Switch, Route, Link} from "react-router-dom";
 
-import config from "./config";
-import Delivery_app from "./Delivery_app";
+import config from "../config";
+import Delivery_app from "../component/Delivery_app";
 
 let App_selector_screen = (props) => {
 	//MAGIC 5 delivery apps

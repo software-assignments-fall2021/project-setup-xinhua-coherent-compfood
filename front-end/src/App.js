@@ -1,13 +1,10 @@
-import {useState, useEffect} from "react";
-import {BrowserRouter, Switch, Route, Link} from "react-router-dom";
+import {BrowserRouter, Switch, Route} from "react-router-dom";
 
-import App_selector_screen from "./App_selector_screen";
-import Header from "./Header";
-import Home_screen from "./Home_screen";
-import Order_screen from "./Order_screen";
-import Restaurant_screen from "./Restaurant_screen";
-import SignUp from "./signUp";
-import SignIn from "./signIn";
+import DeliveryAppScreen from "./screen/DeliveryAppList";
+import Header from "./component/Header";
+import MenuItemListScreen from "./screen/MenuItemList";
+import OrderConfirmationScreen from "./screen/OrderConfirmation";
+import RestaurantListScreen from "./screen/RestaurantList";
 
 import "./all.css";
 
@@ -18,33 +15,22 @@ let App = (props) => {
 
 			<BrowserRouter>
 				<Switch>
-					{//sign up screen
-
+					{//list of menu items from restaurant chosen
 					}
-					
-					<Route path="/signUp" component={SignUp} />
+					<Route path="/restaurant/:order_id" component={MenuItemListScreen} />
 
-					{//sign in screen
+					{//list of delivery apps that can serve the order
 					}
-					
-					<Route path="/signIn" component={SignIn} />	
+					<Route path="/delivery/:order_id" component={DeliveryAppScreen} />
 
-					{//restaurant screen
+					{//waiting for external delivery app to confirm the order
 					}
-					<Route path="/restaurant/:order_id" component={Restaurant_screen} />
+					<Route path="/processing/:order_id" component={OrderConfirmationScreen} />
 
-					{//app selector screen
-					}
-					<Route path="/delivery/:order_id" component={App_selector_screen} />
-
-					{//processing order screen
-					}
-					<Route path="/processing/:order_id" component={Order_screen} />
-
-					{//home screen
+					{//list of restaurants close to user
 					}
 					<Route path="/">
-						<Home_screen />
+						<RestaurantListScreen />
 					</Route>
 				</Switch>
 			</BrowserRouter>
