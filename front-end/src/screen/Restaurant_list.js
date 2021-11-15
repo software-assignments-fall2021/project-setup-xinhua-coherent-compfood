@@ -5,7 +5,7 @@ import {BrowserRouter, Switch, Route, Link} from "react-router-dom";
 import config from "../config";
 import Restaurant from "../component/Restaurant";
 
-let Home_screen = (props) => {
+let Restaurant_list = (props) => {
 	//MAGIC 10-12 restaurants
 	let num_restaurants = 10 + Math.floor(Math.random() * 3);
 
@@ -40,4 +40,4 @@ let Home_screen = (props) => {
 	);
 };
 
-export default Home_screen;
+export default Restaurant_list;
