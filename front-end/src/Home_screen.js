@@ -1,9 +1,22 @@
 import axios from "axios";
 import {useState, useEffect} from "react";
 import {BrowserRouter, Switch, Route, Link} from "react-router-dom";
-
+import styled from 'styled-components'
 import config from "./config";
 import Restaurant from "./Restaurant";
+
+const Button = styled.button`
+	background-color: black;
+	color: white;
+	padding: 5px 15px;
+	border-radius: 5px;
+	outline: 0;
+	box-shadow: 0px 2px 2px lightgrey;
+`
+function clickMe(){
+	alert('light/dark mode toggled');
+}
+
 
 let Home_screen = (props) => {
 	//MAGIC 10-12 restaurants
@@ -34,9 +47,17 @@ let Home_screen = (props) => {
 
 	return (
 		<div>
-			<h2>Restaurants near you</h2>
-			{restaurants}
+			<div>
+				<h2>Restaurants near you</h2>
+				<div>
+					<Button onClick={clickMe}>
+						Light/Dark
+					</Button>
+				</div>
+				{restaurants}
+				</div>
 		</div>
+		
 	);
 };
 
