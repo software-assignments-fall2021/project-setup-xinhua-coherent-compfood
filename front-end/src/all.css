@@ -152,3 +152,7 @@ div {
 .flex-divider {
 	flex-grow: 1;
 }
+
+.header {
+	padding: 3em;
+}
