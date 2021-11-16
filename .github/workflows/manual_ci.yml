@@ -1,0 +1,46 @@
+name: CI (backend only)
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: "Branch to merge in before tests"
+        required: true
+        default: "master"
+
+env:
+  NONE: none
+
+jobs:
+  test-cases:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Run tests only
+        run: |
+          git config user.name "A"
+          git config user.email "a@a.aa"
+          git merge -X theirs ${{ github.event.inputs.branch }}
+          cd back-end
+          npm install
+          npm run test-only
+  code-coverage:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Run tests and checks code coverage
+        run: |
+          git config user.name "A"
+          git config user.email "a@a.aa"
+          git merge -X theirs ${{ github.event.inputs.branch }}
+          cd back-end
+          npm install
+          npm run test-cov
