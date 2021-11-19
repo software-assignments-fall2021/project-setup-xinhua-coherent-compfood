@@ -48,5 +48,9 @@ describe("/order/:order_id GET endpoint", () => {
 
 		assert.typeOf(data["app_id"], "number");
 	});
+
+	it("will have status code 404 for invalid order_id", async () => {
+		assert.equal(404, (await request("/order/invalid_id_lol"))[1]);
+	});
 });
 
