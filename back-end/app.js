@@ -17,6 +17,13 @@ server.use(morgan("dev"));
 //parse json bodies
 server.use(express.json());
 
+//add cors allow origin header after response is set
+server.use((req, resp, next) => {
+	next();
+
+	resp.set("Access-Control-Allow-Origin", config.frontend_base_url);
+});
+
 //static directory is accessible as /static/ and loads files from ./public
 server.use("/static/", express.static("./public/"));
 
@@ -54,28 +61,24 @@ server.get("/", (req, resp) => {
 
 server.get("/apps", async (req, resp) => {
 	let data = JSON.parse(await fs.readFile("./data/new_apps"));
-	resp.set("Access-Control-Allow-Origin", config.frontend_base_url);
 
 	return resp.json(data);
 });
 
 server.get("/foods", async (req, resp) => {
 	let data = JSON.parse(await fs.readFile("./data/new_foods"));
-	resp.set("Access-Control-Allow-Origin", config.frontend_base_url);
 
 	return resp.json(data);
 });
 
 server.get("/restaurants", async (req, resp) => {
 	let data = JSON.parse(await fs.readFile("./data/new_restaurants"));
-	resp.set("Access-Control-Allow-Origin", config.frontend_base_url);
 
 	return resp.json(data);
 });
 
 server.post("/new_order", async (req, resp) => {
 	let data = gen_new_order();
-	resp.set("Access-Control-Allow-Origin", config.frontend_base_url);
 
 	return resp.json(data);
 });
@@ -92,7 +95,6 @@ server.get("/order/:order_id", async (req, resp) => {
 		data = {"error": "Order not found"};
 		resp.statusCode = 404;
 	}
-	resp.set("Access-Control-Allow-Origin", config.frontend_base_url);
 
 	return resp.json(data);
 });
