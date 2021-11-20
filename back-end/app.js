@@ -28,54 +28,42 @@ const server = express();
 server.use(express.json({ limit: "50mb" }));
 
 
-server.post("/signUp", async (req, res) => {
-  try {
-    // Get user input
-    const { first_name, last_name, email, password } = req.body;
+server.post('/register', (req, res) => {
+  let flag = 0;
   
-    // Validate user input
-    if (!(email && password && first_name && last_name)) {
-      res.status(400).send("All input is required");
-    }
+  const User = mongoose.model('User');
+  User.find((err, result) => {
+      for(let i = 0; i < result.length; i++){
+          if(req.body.username === result[i].username){
+              flag = 1;
+      let message = 'Username already exists, please login'
+              res.render('error', {message: message});
+          }
+      } 
+      
+      if(req.body.password.length < 8){
+          if(flag === 0){
+              flag = 1;
+      let message = 'Pasword is not long enough, please try again'
+              res.render('error', {message: message});
+          }
+      }
 
-      // check if user already exist
-
-   // Validate if user exist in our database
-   const oldUser = await User.findOne({ email });
- 
-   if (oldUser) {
-     return res.status(409).send("User Already Exist. Please Login");
-   }
-
-     //Encrypt user password
-     encryptedPassword = await bcrypt.hash(password, 10);
-
-  // Create user in our database
-  const user = await User.create({
-    first_name,
-    last_name,
-    email: email.toLowerCase(), // sanitize: convert email to lowercase
-    password: encryptedPassword,
+      if(flag === 0){
+          const myPlaintextPassword = req.body.password;
+          const saltRounds = 10;
+          bcrypt.hash(myPlaintextPassword, saltRounds, function(err, hash) {
+              const user = new User({
+                  username: req.body.username,
+                  password: hash
+              });
+              user.save(() => {  
+                  res.redirect('/');	
+              });
+          });
+      }   
   });
-
-  // Create token
-  const token = jwt.sign(
-    { user_id: user._id, email },
-    process.env.TOKEN_KEY,
-    {
-      expiresIn: "2h",
-    }
-  );
-  // save user token
-  user.token = token;
-
-    // return new user
-    res.status(201).json(user);
-    
-  } catch (err) {
-    console.log(err);
-  }
- });
+});
  
  server.post('/login', (req, res) => {
 	User.findOne({username: req.body.username}, (err, user) => {
