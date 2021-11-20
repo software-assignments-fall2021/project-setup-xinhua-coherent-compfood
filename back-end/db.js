@@ -1,10 +1,12 @@
-const mongoose = require('mongoose');
-const User = new mongoose.Schema({
-    username: {type: String, required: true},
-    password: {type: String, required: true},
-});
+const mongoose = require("mongoose");
 
-mongoose.model('User', User);
+const userSchema = new mongoose.Schema({
+  first_name: { type: String, default: null },
+  last_name: { type: String, default: null },
+  email: { type: String, unique: true },
+  password: { type: String },
+  token: { type: String },
+});
 
 const MONGODB_URI = 'mongodb+srv://swe474.bimfy.mongodb.net/swe474'
 
@@ -12,3 +14,5 @@ const MONGODB_URI = 'mongodb+srv://swe474.bimfy.mongodb.net/swe474'
        useNewUrlParser: true,
        useUnifiedTopology: true
 });
+
+module.exports = mongoose.model("user", userSchema);
