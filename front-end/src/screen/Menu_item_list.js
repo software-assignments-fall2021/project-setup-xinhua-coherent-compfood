@@ -2,9 +2,10 @@ import axios from "axios";
 import {useState, useEffect} from "react";
 import {BrowserRouter, Switch, Route, Link} from "react-router-dom";
 
-import Menu_item from "./Menu_item";
+import config from "../config";
+import Menu_item from "../component/Menu_item";
 
-let Restaurant_screen = (props) => {
+let Menu_item_list = (props) => {
 	//MAGIC 12-46 items per restaurant
 	let num_menu_items = 12 + Math.floor(Math.random() * 35);
 
@@ -12,7 +13,7 @@ let Restaurant_screen = (props) => {
 
 	useEffect(
 		() => {
-			axios(`${process.env.REACT_APP_api_base_url}/foods?rows=${num_menu_items}`)
+			axios(`${config.backend_base_url}/foods?rows=${num_menu_items}`)
 				.then((resp) => {
 					let data = resp.data;
 					let temp = [];
@@ -38,11 +39,11 @@ let Restaurant_screen = (props) => {
 
 	return (
 		<div>
-		<p>Restaurant screen</p>
+		<h2>Menu</h2>
 		{menu_items}
 		<a href={`/delivery/${get_order_id()}`}>FIND APP</a>
 		</div>
 	);
 };
 
-export default Restaurant_screen;
+export default Menu_item_list;

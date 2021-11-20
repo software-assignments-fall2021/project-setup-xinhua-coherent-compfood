@@ -2,9 +2,10 @@ import axios from "axios";
 import {useState, useEffect} from "react";
 import {BrowserRouter, Switch, Route, Link} from "react-router-dom";
 
-import Restaurant from "./Restaurant";
+import config from "../config";
+import Restaurant from "../component/Restaurant";
 
-let Home_screen = (props) => {
+let Restaurant_list = (props) => {
 	//MAGIC 10-12 restaurants
 	let num_restaurants = 10 + Math.floor(Math.random() * 3);
 
@@ -12,7 +13,7 @@ let Home_screen = (props) => {
 
 	useEffect(
 		() => {
-			axios(`${process.env.REACT_APP_api_base_url}/restaurants?rows=${num_restaurants}`)
+			axios(`${config.backend_base_url}/restaurants?rows=${num_restaurants}`)
 				.then((resp) => {
 					let data = resp.data;
 					let temp = [];
@@ -33,10 +34,10 @@ let Home_screen = (props) => {
 
 	return (
 		<div>
-		<p>Home screen</p>
-		{restaurants}
+			<h2>Restaurants near you</h2>
+			{restaurants}
 		</div>
 	);
 };
 
-export default Home_screen;
+export default Restaurant_list;

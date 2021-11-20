@@ -39,7 +39,7 @@ We are using `npm` as our package manager and React as our framework. Steps to r
 1. cd to the front-end directory
 
 ```
-cd $(git root)/front-end
+cd front-end
 ```
 
 2. install relevant packages
@@ -48,7 +48,7 @@ cd $(git root)/front-end
 npm install
 ```
 
-3. launch React server (accessable at [http://127.0.0.1:61002](http://127.0.0.1:61002))
+3. launch React server (accessable at [http://127.0.0.1:61002](http://127.0.0.1:61002)) (Note: http://localhost:61002 will NOT work because of CORS)
 
 ```
 npm start
@@ -61,7 +61,7 @@ We are using `npm` as our package manager and Express as our framework. Steps to
 1. cd to the back-end directory
 
 ```
-cd $(git root)/back-end
+cd back-end
 ```
 
 2. install relevant packages
