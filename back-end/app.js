@@ -1,13 +1,14 @@
 let axios = require("axios");
+let bcrypt = require("bcrypt");
 let express = require("express");
 let fs = require("fs/promises");
 let morgan = require("morgan");
 
 let config = require("./config");
-
-let {User} = require("./db");
-
 let jwt = require("./jwt");
+
+//db models
+let {User} = require("./db");
 
 //dotenv loading .env
 require("dotenv").config({
@@ -89,9 +90,12 @@ server.post("/signup", (req, resp) => {
 				return resp.json({error: "Username already exists"});
 			}
 
+			//TODO not sure what difference 1 salt round has vs 2 vs n
+			let salted_hash = bcrypt.hashSync(password, 1);
+
 			let new_user = new User({
 				username,
-				password,
+				password: salted_hash,
 				first_name,
 				last_name
 			});
@@ -106,14 +110,19 @@ server.post("/login", (req, resp) => {
 	let username = req.body.username ?? "";
 	let password = req.body.password ?? "";
 
-	console.log({username, password}, "logging in");
 	User.findOne(
-		{username, password},
+		{username},
 		(err, data) => {
 			if (err || data === null){
 				return resp.json({error: "Incorrect username/password"});
 			}
-			return resp.json(jwt.signer({token: {username: data.username}}));
+
+			if (bcrypt.compareSync(password, data.password)){
+				return resp.json(jwt.signer({token: {username: data.username}}));
+			}
+			else{
+				return resp.json({error: "Incorrect username/password"});
+			}
 		}
 	);
 });
