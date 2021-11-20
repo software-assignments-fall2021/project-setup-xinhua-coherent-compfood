@@ -15,7 +15,9 @@ let middleware = passport.initialize();
 
 let jwt_options = {
 	secretOrKey: process.env.JWT_SECRET,
-	jwtFromRequest: passport_jwt.ExtractJwt.fromAuthHeaderAsBearerToken()
+	jwtFromRequest: passport_jwt.ExtractJwt.fromAuthHeaderAsBearerToken(),
+	//preemptively mitigate algorithm swapping attack
+	algorithms: ["HS256"]
 };
 
 let signer = (user_info) => {
