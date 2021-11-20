@@ -7,6 +7,7 @@ import Home_screen from "./Home_screen";
 import Order_screen from "./Order_screen";
 import Restaurant_screen from "./Restaurant_screen";
 import SignUp from "./signUp";
+import SignIn from "./signIn";
 
 import "./App.css";
 
@@ -17,11 +18,16 @@ let App = (props) => {
 
 			<BrowserRouter>
 				<Switch>
-					{
+					{//sign up screen
 
 					}
 					
 					<Route path="/signUp" component={SignUp} />
+
+					{//sign in screen
+					}
+					
+					<Route path="/signIn" component={SignIn} />	
 
 					{//restaurant screen
 					}
