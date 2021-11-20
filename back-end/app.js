@@ -4,25 +4,22 @@ let morgan = require("morgan");
 
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-
-const passport = require("passport")
- 
-//require('./db');
- 
+  
 require("dotenv").config({
  silent: true
 });
  
- 
-//const User = mongoose.model('User');
- 
- 
-//require("dotenv").config();
 require("./config/database").connect();
 const express = require("express");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
  
+require('./db');
+
+server.use(bodyParser.urlencoded({extended: true}));
+const cookieParser = require('cookie-parser')
+server.use(cookieParser())
+
 const User = require("./model/user");
 const auth = require("./middleware/auth");
  
@@ -80,39 +77,35 @@ server.post("/signUp", async (req, res) => {
   }
  });
  
- server.post("/login", async (req, res) => {
-  try {
-    // Get user input
-    const { email, password } = req.body;
-  
-    // Validate user input
-    if (!(email && password)) {
-      res.status(400).send("All input is required");
+ app.post('/login', (req, res) => {
+	User.findOne({username: req.body.username}, (err, user) => {
+        if (!err && user) {
+            bcrypt.compare(req.body.password, user.password, (err, passwordMatch) => {
+                if(passwordMatch){
+                        if (!err) {
+						curruntuser = req.body.username;
+						let accessToken = jwt.sign({user: user}, process.env.ACCESS_TOKEN_SECRET, {expiresIn: "30s"})
+
+						res.cookie("jwt", accessToken, {secure: true, httpOnly: true})
+                        res.redirect('/home');
+                        } else {
+                        console.log('error'); 
+                        res.send('an error occurred, please see the server logs for more information');
+                        }
+                }
+                else{
+                	let message = 'Incorrect password, please try again'
+
+                }
+              });
     }
-    // Validate if user exist in our database
-    const user = await User.findOne({ email });
-  
-    if (user && (await bcrypt.compare(password, user.password))) {
-      // Create token
-      const token = jwt.sign(
-        { user_id: user._id, email },
-        process.env.TOKEN_KEY,
-        {
-          expiresIn: "2h",
-        }
-      );
-  
-      // save user token
-      user.token = token;
-  
-      // user
-      res.status(200).json(user);
+    else{
+		let message = 'Username does not exsist, please register'
+
     }
-    res.status(400).send("Invalid Credentials");
-  } catch (err) {
-    console.log(err);
-  }
- });
+    });
+
+});
  
  server.get("/welcome", auth, (req, res) => {
   res.status(200).send("Welcome 🙌 ");
