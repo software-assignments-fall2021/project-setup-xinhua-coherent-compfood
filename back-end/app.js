@@ -53,6 +53,24 @@ server.post("/signUp", async (req, res) => {
      //Encrypt user password
      encryptedPassword = await bcrypt.hash(password, 10);
 
+  // Create user in our database
+  const user = await User.create({
+    first_name,
+    last_name,
+    email: email.toLowerCase(), // sanitize: convert email to lowercase
+    password: encryptedPassword,
+  });
+
+  // Create token
+  const token = jwt.sign(
+    { user_id: user._id, email },
+    process.env.TOKEN_KEY,
+    {
+      expiresIn: "2h",
+    }
+  );
+  // save user token
+  user.token = token;
 
   
     
