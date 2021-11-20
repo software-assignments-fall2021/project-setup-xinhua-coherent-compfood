@@ -65,6 +65,43 @@ server.get("/", jwt.require_login(), (req, resp) => {
 	return resp.json(data);
 });
 
+server.post("/signup", (req, resp) => {
+	let username = req.body.username ?? "";
+	let password = req.body.password ?? "";
+	let first_name = req.body.first_name ?? "";
+	let last_name = req.body.last_name ?? "";
+
+	//check non-empty username and password
+	//MAGIC minimum password length is 10
+	if (username === "" || password.length < 10){
+		return resp.json({error: "Username should be non-empty and password length must be at least 10"});
+	}
+
+	User.findOne(
+		{username},
+		(err, data) => {
+			if (err){
+				return resp.json({error: "Database error"});
+			}
+
+			//TODO fix race condition on username check and adding new user to db
+			if (data !== null){
+				return resp.json({error: "Username already exists"});
+			}
+
+			let new_user = new User({
+				username,
+				password,
+				first_name,
+				last_name
+			});
+			new_user.save();
+
+			return resp.json({message: "Signup successful"});
+		}
+	);
+});
+
 server.post("/login", (req, resp) => {
 	let username = req.body.username ?? "";
 	let password = req.body.password ?? "";
