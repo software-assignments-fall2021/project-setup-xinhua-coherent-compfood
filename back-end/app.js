@@ -5,6 +5,10 @@ let morgan = require("morgan");
 
 let config = require("./config");
 
+let {User} = require("./db");
+
+let jwt = require("./jwt");
+
 //dotenv loading .env
 require("dotenv").config({
 	silent: true
@@ -17,11 +21,13 @@ server.use(morgan("dev"));
 //parse json bodies
 server.use(express.json());
 
-//add cors allow origin header after response is set
-server.use((req, resp, next) => {
-	next();
+//add authentication middleware
+server.use(jwt.middleware);
 
+//add cors allow origin header before response is set
+server.use((req, resp, next) => {
 	resp.set("Access-Control-Allow-Origin", config.frontend_base_url);
+	next();
 });
 
 //static directory is accessible as /static/ and loads files from ./public
@@ -49,7 +55,7 @@ let gen_new_order = () => {
 	return order_id;
 };
 
-server.get("/", (req, resp) => {
+server.get("/", jwt.require_login(), (req, resp) => {
 	let data = {
 		"working": true,
 		"fully_functional": false,
@@ -57,6 +63,22 @@ server.get("/", (req, resp) => {
 	};
 
 	return resp.json(data);
+});
+
+server.post("/login", (req, resp) => {
+	let username = req.body.username ?? "";
+	let password = req.body.password ?? "";
+
+	console.log({username, password}, "logging in");
+	User.findOne(
+		{username, password},
+		(err, data) => {
+			if (err || data === null){
+				return resp.json({error: "Incorrect username/password"});
+			}
+			return resp.json(jwt.signer({token: {username: data.username}}));
+		}
+	);
 });
 
 server.get("/apps", async (req, resp) => {
