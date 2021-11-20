@@ -72,7 +72,8 @@ server.post("/signUp", async (req, res) => {
   // save user token
   user.token = token;
 
-  
+    // return new user
+    res.status(201).json(user);
     
   } catch (err) {
     console.log(err);
