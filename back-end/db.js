@@ -7,9 +7,7 @@ const User = new mongoose.Schema({
   password: { type: String },
 });
 
-const MONGODB_URI = 'mongodb+srv://swe474.bimfy.mongodb.net/swe474'
-
- mongoose.connect(MONGODB_URI  || 'mongodb://localhost/compfood', {
+ mongoose.connect(process.env.MONGO_DB_URL || 'mongodb://localhost/compfood', {
        useNewUrlParser: true,
        useUnifiedTopology: true
 });
