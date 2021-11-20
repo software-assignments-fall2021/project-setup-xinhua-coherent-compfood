@@ -117,15 +117,6 @@ server.post("/signUp", async (req, res) => {
  server.get("/welcome", auth, (req, res) => {
   res.status(200).send("Welcome 🙌 ");
  });
- 
-
-
-
-
-
-
-
-
 
 server.get("/apps", async (req, resp) => {
 	let data = JSON.parse(await fs.readFile("./data/new_apps"));
@@ -148,7 +139,21 @@ server.get("/restaurants", async (req, resp) => {
 	return resp.json(data);
 });
     
-
+ 
+// This should be the last route else any after it won't work
+ 
+ 
+server.use("*", (req, res) => {
+  res.status(404).json({
+    success: "false",
+    message: "Page not found",
+    error: {
+    statusCode: 404,
+    message: "You reached a route that is not defined on this server",
+    },
+  });
+ });
+ 
 
 
 module.exports = server;
