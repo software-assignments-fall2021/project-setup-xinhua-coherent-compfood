@@ -77,7 +77,7 @@ server.post("/signUp", async (req, res) => {
   }
  });
  
- app.post('/login', (req, res) => {
+ server.post('/login', (req, res) => {
 	User.findOne({username: req.body.username}, (err, user) => {
         if (!err && user) {
             bcrypt.compare(req.body.password, user.password, (err, passwordMatch) => {
