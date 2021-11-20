@@ -2,10 +2,10 @@ import axios from "axios";
 import {useState, useEffect} from "react";
 import {BrowserRouter, Switch, Route, Link} from "react-router-dom";
 
-import config from "./config";
-import Delivery_app from "./Delivery_app";
+import config from "../config";
+import Delivery_app from "../component/Delivery_app";
 
-let App_selector_screen = (props) => {
+let Delivery_app_list = (props) => {
 	//MAGIC 5 delivery apps
 	let num_delivery_apps = 5;
 
@@ -40,4 +40,4 @@ let App_selector_screen = (props) => {
 	);
 };
 
-export default App_selector_screen;
+export default Delivery_app_list;
