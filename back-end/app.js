@@ -5,6 +5,42 @@ let morgan = require("morgan");
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
+const passport = require("passport")
+ 
+//require('./db');
+ 
+require("dotenv").config({
+ silent: true
+});
+ 
+ 
+//const User = mongoose.model('User');
+ 
+ 
+//require("dotenv").config();
+require("./config/database").connect();
+const express = require("express");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+ 
+const User = require("./model/user");
+const auth = require("./middleware/auth");
+ 
+const server = express();
+ 
+server.use(express.json({ limit: "50mb" }));
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 server.get("/apps", async (req, resp) => {
