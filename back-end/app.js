@@ -114,7 +114,10 @@ server.post("/signUp", async (req, res) => {
   }
  });
  
-
+ server.get("/welcome", auth, (req, res) => {
+  res.status(200).send("Welcome 🙌 ");
+ });
+ 
 
 
 
