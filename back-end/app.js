@@ -31,7 +31,22 @@ const server = express();
 server.use(express.json({ limit: "50mb" }));
 
 
-
+server.post("/signUp", async (req, res) => {
+  try {
+    // Get user input
+    const { first_name, last_name, email, password } = req.body;
+  
+    // Validate user input
+    if (!(email && password && first_name && last_name)) {
+      res.status(400).send("All input is required");
+    }
+  
+    
+  } catch (err) {
+    console.log(err);
+  }
+ });
+ 
 
 
 
