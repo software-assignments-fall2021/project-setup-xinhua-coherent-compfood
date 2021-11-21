@@ -11,10 +11,12 @@ let {User} = require("./db");
 
 
 
+let running_unit_tests = process.env.UNIT_TESTING === "1";
+
 let middleware = passport.initialize();
 
 let jwt_options = {
-	secretOrKey: process.env.JWT_SECRET,
+	secretOrKey: running_unit_tests ? "SECRET FOR UNIT TESTING PURPOSES ONLY" : process.env.JWT_SECRET,
 	jwtFromRequest: passport_jwt.ExtractJwt.fromAuthHeaderAsBearerToken(),
 	//preemptively mitigate algorithm swapping attack
 	algorithms: ["HS256"]
