@@ -27,8 +27,10 @@ let signer = (user_info) => {
 };
 
 let verifier = (jwt, done) => {
+	let token = jwt.token;
+
 	User.findOne(
-		{username: jwt.username},
+		{username: token.username},
 		(err, data) => {
 			if (err || data === null){
 				return done(err, undefined);

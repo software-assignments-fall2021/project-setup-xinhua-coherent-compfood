@@ -56,11 +56,19 @@ let gen_new_order = () => {
 	return order_id;
 };
 
-server.get("/", /*jwt.require_login(), */(req, resp) => {
+server.get("/", (req, resp) => {
 	let data = {
 		"working": true,
 		"fully_functional": false,
 		"class_num": 474
+	};
+
+	return resp.json(data);
+});
+
+server.get("/__unit_test/am_i_logged_in", jwt.require_login(), (req, resp) => {
+	let data = {
+		"answer": true
 	};
 
 	return resp.json(data);
