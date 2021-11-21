@@ -56,7 +56,7 @@ let gen_new_order = () => {
 	return order_id;
 };
 
-server.get("/", jwt.require_login(), (req, resp) => {
+server.get("/", /*jwt.require_login(), */(req, resp) => {
 	let data = {
 		"working": true,
 		"fully_functional": false,
