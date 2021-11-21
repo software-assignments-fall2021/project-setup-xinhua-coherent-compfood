@@ -10,11 +10,6 @@ describe("/apps endpoint", () => {
 		done();
 	});
 
-	//TODO for some reason refused to work uncommented
-	//after(() => {
-	//	server.stop();
-	//});
-
 	it("will have status code 200", async () => {
 		assert.equal(200, (await request("/apps"))[1]);
 	});
