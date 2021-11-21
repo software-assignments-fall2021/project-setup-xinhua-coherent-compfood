@@ -24,8 +24,8 @@ describe("/orders endpoint", () => {
 	});
 
 	it("will have exactly the expected fields in each element", async () => {
-		let data = (await request("/apps"))[0];
-		let expected_keys = ["id", "first_name", "last_name","email","gender","date", "order"];
+		let data = (await request("/orders"))[0];
+		let expected_keys = ["id", "first_name", "last_name","email","date", "order"];
 
 		for (let it of data){
 			assert.hasAllKeys(it, expected_keys);
