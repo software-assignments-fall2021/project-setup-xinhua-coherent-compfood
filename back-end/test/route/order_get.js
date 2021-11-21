@@ -11,11 +11,6 @@ describe("/order/:order_id GET endpoint", () => {
 		done();
 	});
 
-	//TODO for some reason refused to work uncommented
-	//after(() => {
-	//	server.stop();
-	//});
-
 	it("will have status code 200", async () => {
 		order_id = (await request("/new_order", {method: "POST"}))[0];
 
