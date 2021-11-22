@@ -8,6 +8,12 @@ const SignIn = () => {
               Login Page
           </div>
           <div className = "username-box-outside-border">
+            <input type = "text" className = "username-box" placeholder = "First Name.."/>
+          </div>
+          <div className = "username-box-outside-border">
+            <input type = "text" className = "username-box" placeholder = "Last Name.."/>
+          </div>
+          <div className = "username-box-outside-border">
             <input type = "text" className = "username-box" placeholder = "username..."/>
           </div>
           <div className = "password-box-outside-border">
