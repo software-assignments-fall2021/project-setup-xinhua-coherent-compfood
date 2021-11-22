@@ -13,6 +13,20 @@ const User = new mongoose.Schema({
 	password: { type: String },
 });
 
+const Food = new mongoose.Schema({
+	name: { type: String, default: null },
+	price: { type: Number, default: 0 },
+});
+
+const Restaurant = new mongoose.Schema({
+	name: {type: String, default: null},
+	menu: [Food]
+});
+
+
+
+
+
 //async iife
 (async () => {
 
@@ -53,5 +67,7 @@ else{
 })();
 
 module.exports = {
-	User: mongoose.model("User", User)
+	User: mongoose.model("User", User),
+	Restaurant: mongoose.model("Restaurant", Restaurant),
+	Food: mongoose.model("Food", Food)
 };
