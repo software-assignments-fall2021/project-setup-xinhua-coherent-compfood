@@ -30,6 +30,7 @@ let App = (props) => {
 					<Route path="/signIn" component={SignIn} />	
 
 					{//restaurant screen
+					}
 
 					{//list of menu items from restaurant chosen
 
