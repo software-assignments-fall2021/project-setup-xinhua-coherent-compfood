@@ -1,9 +1,14 @@
 let axios = require("axios");
+let bcrypt = require("bcrypt");
 let express = require("express");
 let fs = require("fs/promises");
 let morgan = require("morgan");
 
 let config = require("./config");
+let jwt = require("./jwt");
+
+//db models
+let {User} = require("./db");
 
 //dotenv loading .env
 require("dotenv").config({
@@ -17,11 +22,13 @@ server.use(morgan("dev"));
 //parse json bodies
 server.use(express.json());
 
-//add cors allow origin header after response is set
-server.use((req, resp, next) => {
-	next();
+//add authentication middleware
+server.use(jwt.middleware);
 
+//add cors allow origin header before response is set
+server.use((req, resp, next) => {
 	resp.set("Access-Control-Allow-Origin", config.frontend_base_url);
+	next();
 });
 
 //static directory is accessible as /static/ and loads files from ./public
@@ -57,6 +64,75 @@ server.get("/", (req, resp) => {
 	};
 
 	return resp.json(data);
+});
+
+server.get("/__unit_test/am_i_logged_in", jwt.require_login(), (req, resp) => {
+	let data = {
+		"answer": true
+	};
+
+	return resp.json(data);
+});
+
+server.post("/signup", (req, resp) => {
+	let username = req.body.username ?? "";
+	let password = req.body.password ?? "";
+	let first_name = req.body.first_name ?? "";
+	let last_name = req.body.last_name ?? "";
+
+	//check non-empty username and password
+	//MAGIC minimum password length is 10
+	if (username === "" || password.length < 10){
+		return resp.json({error: "Username should be non-empty and password length must be at least 10"});
+	}
+
+	User.findOne(
+		{username},
+		(err, data) => {
+			if (err){
+				return resp.json({error: "Database error"});
+			}
+
+			//TODO fix race condition on username check and adding new user to db
+			if (data !== null){
+				return resp.json({error: "Username already exists"});
+			}
+
+			//TODO not sure what difference 1 salt round has vs 2 vs n
+			let salted_hash = bcrypt.hashSync(password, 1);
+
+			let new_user = new User({
+				username,
+				password: salted_hash,
+				first_name,
+				last_name
+			});
+			new_user.save();
+
+			return resp.json({message: "Signup successful"});
+		}
+	);
+});
+
+server.post("/login", (req, resp) => {
+	let username = req.body.username ?? "";
+	let password = req.body.password ?? "";
+
+	User.findOne(
+		{username},
+		(err, data) => {
+			if (err || data === null){
+				return resp.json({error: "Incorrect username/password"});
+			}
+
+			if (bcrypt.compareSync(password, data.password)){
+				return resp.json(jwt.signer({token: {username: data.username}}));
+			}
+			else{
+				return resp.json({error: "Incorrect username/password"});
+			}
+		}
+	);
 });
 
 server.get("/apps", async (req, resp) => {

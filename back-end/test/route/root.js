@@ -10,10 +10,6 @@ describe("/ endpoint", () => {
 		done();
 	});
 
-	after(() => {
-		server.stop();
-	});
-
 	it("will have status code 200", async () => {
 		assert.equal(200, (await request("/"))[1]);
 	});
