@@ -23,9 +23,6 @@ const Restaurant = new mongoose.Schema({
 	menu: [Food]
 });
 
-const Restaurants = new mongoose.Schema({
-	restaurants: [Restaurant]
-});
 
 
 
@@ -72,6 +69,5 @@ else{
 module.exports = {
 	User: mongoose.model("User", User),
 	Restaurant: mongoose.model("Restaurant", Restaurant),
-	Food: mongoose.model("Food", Food),
-	Restaurants: mongoose.model("Restaurants", Restaurants)
+	Food: mongoose.model("Food", Food)
 };
