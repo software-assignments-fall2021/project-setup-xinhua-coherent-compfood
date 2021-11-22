@@ -1,7 +1,14 @@
 let axios = require("axios");
+let bcrypt = require("bcrypt");
 let express = require("express");
 let fs = require("fs/promises");
 let morgan = require("morgan");
+
+let config = require("./config");
+let jwt = require("./jwt");
+
+//db models
+let {User} = require("./db");
 
 //dotenv loading .env
 require("dotenv").config({
@@ -15,151 +22,157 @@ server.use(morgan("dev"));
 //parse json bodies
 server.use(express.json());
 
+//add authentication middleware
+server.use(jwt.middleware);
+
+//add cors allow origin header before response is set
+server.use((req, resp, next) => {
+	resp.set("Access-Control-Allow-Origin", config.frontend_base_url);
+	next();
+});
+
 //static directory is accessible as /static/ and loads files from ./public
 server.use("/static/", express.static("./public/"));
 
+//global variables
 
+//TODO make sure orders can only be accessed by the user who made them, when login gets implemented
+let next_order_id = 0;
+let orders = {};
 
-const bcrypt = require('bcryptjs');
-const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
-require('./db');
-const jwt = require('jsonwebtoken')
-server.use(bodyParser.urlencoded({extended: true}));
-const cookieParser = require('cookie-parser')
-server.use(cookieParser())
+//this ^^^ should be avoided, but this is stopgap until mongoose -> mongodb atlas connection is made
 
-const {verify} = require('./middleware')
+let gen_new_order = () => {
+	let order_id = next_order_id;
+	++next_order_id;
 
-server.set('view engine', 'hbs');
+	//MAGIC -1 for not defined yet
+	orders[order_id] = {
+		id: order_id,
+		restaurant_id: -1,
+		food_ids: [],
+		app_id: -1
+	};
+	return order_id;
+};
 
-server.use(express.urlencoded({extended:false}));
-
-const User = mongoose.model('User');
-var curruntuser
-
-
-server.get('/', (req, res) => {
-    res.render('index', {user: curruntuser, home: true});
-});
-
-
-server.get('/login', (req, res) => {
-    res.render('login');
-});
-
-server.get('/register', (req, res) => {
-  res.render('register');
-});
-
-
-
-server.post('/login', (req, res) => {
-	User.findOne({username: req.body.username}, (err, user) => {
-        if (!err && user) {
-            bcrypt.compare(req.body.password, user.password, (err, passwordMatch) => {
-                if(passwordMatch){
-                        if (!err) {
-						curruntuser = req.body.username;
-						let accessToken = jwt.sign({user: user}, process.env.ACCESS_TOKEN_SECRET, {expiresIn: "30s"})
-
-						res.cookie("jwt", accessToken, {secure: true, httpOnly: true})
-                        res.redirect('/home');
-                        } else {
-                        console.log('error'); 
-                        res.send('an error occurred, please see the server logs for more information');
-                        }
-                }
-                else{
-                	let message = 'Incorrect password, please try again'
-        			res.render('error', {message: message});
-                }
-              });
-    }
-    else{
-		let message = 'Username does not exsist, please register'
-        res.render('error', {message: message});
-    }
-    });
-
-});
-
-server.post('/register', (req, res) => {
-    let flag = 0;
-    console.log('HIIIII', req.body.password)
-    //const User = mongoose.model('User');
-    console.log("HELLOOO")
-    User.find((err, result) => {
-        console.log("HELLOOO")
-        for(let i = 0; i < result.length; i++){
-            if(req.body.username === result[i].username){
-                flag = 1;
-				let message = 'Username already exists, please login'
-                res.render('error', {message: message});
-            }
-        } 
-        
-        if(req.body.password.length < 8){
-            if(flag === 0){
-                flag = 1;
-				let message = 'Pasword is not long enough, please try again'
-                res.render('error', {message: message});
-            }
-        }
-
-        if(flag === 0){
-            console.log("HELLOOO")
-            const myPlaintextPassword = req.body.password;
-            const saltRounds = 10;
-            bcrypt.hash(myPlaintextPassword, saltRounds, function(err, hash) {
-                const user = new User({
-                    username: req.body.username,
-                    password: hash
-                });
-                user.save(() => {  
-                    console.log("hi")
-                    res.redirect('/');	
-                });
-            });
-        }   
-    });
-});
-
-
-
-server.get("/apps", async (req, resp) => {
-    try {
-	let data = JSON.parse(await fs.readFile("./data/new_apps"));
-	resp.set("Access-Control-Allow-Origin", config.frontend_base_url);
+server.get("/", (req, resp) => {
+	let data = {
+		"working": true,
+		"fully_functional": false,
+		"class_num": 474
+	};
 
 	return resp.json(data);
-} catch (err) {
-    next(err);
-  }
+});
+
+server.get("/__unit_test/am_i_logged_in", jwt.require_login(), (req, resp) => {
+	let data = {
+		"answer": true
+	};
+
+	return resp.json(data);
+});
+
+server.post("/signup", (req, resp) => {
+	let username = req.body.username ?? "";
+	let password = req.body.password ?? "";
+	let first_name = req.body.first_name ?? "";
+	let last_name = req.body.last_name ?? "";
+
+	//check non-empty username and password
+	//MAGIC minimum password length is 10
+	if (username === "" || password.length < 10){
+		return resp.json({error: "Username should be non-empty and password length must be at least 10"});
+	}
+
+	User.findOne(
+		{username},
+		(err, data) => {
+			if (err){
+				return resp.json({error: "Database error"});
+			}
+
+			//TODO fix race condition on username check and adding new user to db
+			if (data !== null){
+				return resp.json({error: "Username already exists"});
+			}
+
+			//TODO not sure what difference 1 salt round has vs 2 vs n
+			let salted_hash = bcrypt.hashSync(password, 1);
+
+			let new_user = new User({
+				username,
+				password: salted_hash,
+				first_name,
+				last_name
+			});
+			new_user.save();
+
+			return resp.json({message: "Signup successful"});
+		}
+	);
+});
+
+server.post("/login", (req, resp) => {
+	let username = req.body.username ?? "";
+	let password = req.body.password ?? "";
+
+	User.findOne(
+		{username},
+		(err, data) => {
+			if (err || data === null){
+				return resp.json({error: "Incorrect username/password"});
+			}
+
+			if (bcrypt.compareSync(password, data.password)){
+				return resp.json(jwt.signer({token: {username: data.username}}));
+			}
+			else{
+				return resp.json({error: "Incorrect username/password"});
+			}
+		}
+	);
+});
+
+server.get("/apps", async (req, resp) => {
+	let data = JSON.parse(await fs.readFile("./data/new_apps"));
+
+	return resp.json(data);
 });
 
 server.get("/foods", async (req, resp) => {
-    try {
 	let data = JSON.parse(await fs.readFile("./data/new_foods"));
-	resp.set("Access-Control-Allow-Origin", config.frontend_base_url);
 
 	return resp.json(data);
-} catch (err) {
-    next(err);
-  }
 });
 
 server.get("/restaurants", async (req, resp) => {
-    try {
 	let data = JSON.parse(await fs.readFile("./data/new_restaurants"));
-	resp.set("Access-Control-Allow-Origin", config.frontend_base_url);
 
 	return resp.json(data);
-} catch (err) {
-    next(err);
-  }
 });
 
+server.post("/new_order", async (req, resp) => {
+	let data = gen_new_order();
 
-    
+	return resp.json(data);
+});
+
+server.get("/order/:order_id", async (req, resp) => {
+	let order_id = Number(req.params.order_id);
+
+	let data;
+
+	if (orders.hasOwnProperty(order_id)){
+		data = orders[order_id];
+	}
+	else{
+		data = {"error": "Order not found"};
+		resp.statusCode = 404;
+	}
+
+	return resp.json(data);
+});
+
 module.exports = server;

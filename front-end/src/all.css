@@ -1,0 +1,169 @@
+#root {
+	width: 90vw;
+	padding: 0px 5vw;
+}
+
+.p {
+	color: rgb(0, 0, 0);
+	margin: 5px;
+}
+
+.go {
+	text-decoration: none;
+	width: 50px;
+	border: 1px solid rgb(238, 124, 31);
+	padding: 1px;
+	margin: 1px;
+	color: rgb(0, 0, 0);
+	background-color: orange;
+	font-size: 1.5em;
+}
+
+div {
+	list-style-type: circle;
+	/*
+	border: 0.5px solid rgb(255, 255, 255);
+	*/
+	background-color: rgb(255, 255, 255);
+}
+
+.relative-pos {
+	position: relative;
+}
+
+.absolute-pos-bar {
+	height: 0.1px;
+}
+
+.slide-left {
+	position: absolute;
+	left: 0px;
+}
+
+.slide-right {
+	position: absolute;
+	right: 0px;
+}
+
+.button {
+	position: absolute;
+	left: 800px;
+	background-color: black;
+	color: white;
+	padding: 5px 15px;
+	border-radius: 5px;
+	outline: 0;
+	box-shadow: 0px 2px 2px lightgrey;
+}
+
+.boxify {
+	padding: 1.5em;
+	margin: 1em 0em;
+	border: 1px black dashed;
+	border-radius: 2em;
+	background-color: lightgray;
+}
+
+.restaurant-card {
+	display: flex;
+	background-color: inherit;
+}
+
+.restaurant-card > img {
+	width: 100px;
+	height: 100px;
+}
+
+.restaurant-card > div {
+	background-color: inherit;
+}
+
+.restaurant-card > div > p:nth-of-type(1) {
+	display: inline;
+	font-size: 2em;
+	font-style: italic;
+}
+
+.restaurant-card > div > p:nth-of-type(3) {
+	font-size: 1.15em;
+}
+
+.restaurant-card > div > .go {
+	margin-left: 1em;
+	display: inline;
+}
+
+.menu-item-card {
+	background-color: inherit;
+	display: flex;
+}
+
+.menu-item-card > img {
+	width: 100px;
+	height: 100px;
+}
+
+.menu-item-card > div {
+	background-color: inherit;
+}
+
+.menu-item-card > div > p:nth-of-type(1) {
+	display: inline;
+	font-size: 2em;
+	font-style: italic;
+}
+
+.menu-item-card > div > p:nth-of-type(2) {
+	display: inline;
+	font-size: 1.15em;
+}
+
+.menu-item-card > div > .go {
+	margin-left: 1em;
+	display: inline;
+}
+
+.delivery-app-card {
+	background-color: inherit;
+	display: flex;
+}
+
+.delivery-app-card > img {
+	width: 100px;
+	height: 100px;
+}
+
+.delivery-app-card > div {
+	background-color: inherit;
+}
+
+.delivery-app-card > div > p:nth-of-type(1) {
+	font-size: 1.3em;
+	display: inline;
+}
+
+.delivery-app-card > div > p:nth-of-type(2) {
+	font-size: 1.06em;
+}
+
+.delivery-app-card > div > .go {
+	margin-left: 1em;
+	display: inline;
+}
+
+.proxy-select {
+	display: none;
+}
+
+.proxy-select:checked + .proxy-item {
+	background-color: #c3c3c3;
+	box-shadow: 4px 4px lightgray;
+}
+
+.flex-divider {
+	flex-grow: 1;
+}
+
+.header {
+	padding: 3em;
+}

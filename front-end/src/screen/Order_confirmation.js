@@ -1,7 +1,7 @@
 import {useState, useEffect} from "react";
 import {BrowserRouter, Switch, Route, Link} from "react-router-dom";
 
-let Order_screen = (props) => {
+let Order_confirmation = (props) => {
 	return (
 		<div>
 			<p>Order screen</p>
@@ -10,4 +10,4 @@ let Order_screen = (props) => {
 	);
 };
 
-export default Order_screen;
+export default Order_confirmation;
