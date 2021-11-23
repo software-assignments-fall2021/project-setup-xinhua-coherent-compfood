@@ -8,7 +8,7 @@ const SignUp = () => {
     return (
       <div>
           <div className = "sign-up-page-title">
-              SignUp Page
+              Sign up Page
           </div>
           <div className = "username-box-outside-border">
             <input type = "text" className = "username-box" placeholder = "First Name.."/>
@@ -25,7 +25,7 @@ const SignUp = () => {
 
           <div className = "signup-button-outside-border">
               <button className = "signup-button">
-                  Signup
+                  Sign up
               </button>
           </div>
       </div>

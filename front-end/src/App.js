@@ -27,7 +27,7 @@ let App = (props) => {
 					{//sign in screen
 					}
 					
-					<Route path="/signIn" component={SignIn} />	
+					<Route path="/login" component={SignIn} />	
 
 					{//restaurant screen
 					}

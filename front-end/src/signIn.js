@@ -5,7 +5,7 @@ const SignIn = () => {
     return (
       <div>
           <div className = "sign-in-page-title">
-              Login Page
+              Sign in Page
           </div>
           <div className = "username-box-outside-border">
             <input type = "text" className = "username-box" placeholder = "First Name.."/>
@@ -21,7 +21,7 @@ const SignIn = () => {
           </div>
           <div className = "login-button-outside-border">
               <button className = "login-button">
-                  Login
+                  Sign in
               </button>
           </div>
       </div>
