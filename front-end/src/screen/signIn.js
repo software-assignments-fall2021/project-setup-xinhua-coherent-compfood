@@ -1,17 +1,11 @@
 import React from 'react';
-import './signIn.css';
+import '../signIn.css';
 
 const SignIn = () => {
     return (
       <div>
           <div className = "sign-in-page-title">
               Login Page
-          </div>
-          <div className = "username-box-outside-border">
-            <input type = "text" className = "username-box" placeholder = "First Name.."/>
-          </div>
-          <div className = "username-box-outside-border">
-            <input type = "text" className = "username-box" placeholder = "Last Name.."/>
           </div>
           <div className = "username-box-outside-border">
             <input type = "text" className = "username-box" placeholder = "username..."/>
