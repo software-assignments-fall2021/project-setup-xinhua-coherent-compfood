@@ -7,8 +7,8 @@ let morgan = require("morgan");
 let config = require("./config");
 let jwt = require("./jwt");
 
-//db models
-let {User} = require("./db");
+//db models + objectid type
+let {App, Food, ObjectId, Order, Restaurant, User} = require("./db");
 
 //dotenv loading .env
 require("dotenv").config({
@@ -154,25 +154,53 @@ server.get("/restaurants", async (req, resp) => {
 });
 
 server.post("/new_order", async (req, resp) => {
-	let data = gen_new_order();
+	let new_order = new Order({});
+	let id = (await new_order.save())._id;
+
+	let data = {
+		id: id.valueOf()
+	};
 
 	return resp.json(data);
 });
 
 server.get("/order/:order_id", async (req, resp) => {
-	let order_id = Number(req.params.order_id);
+	let order_id = req.params.order_id;
 
-	let data;
-
-	if (orders.hasOwnProperty(order_id)){
-		data = orders[order_id];
-	}
-	else{
-		data = {"error": "Order not found"};
-		resp.statusCode = 404;
+	//validate id format
+	if (!order_id.match(/^[0-9a-f]{24}$/)){
+		resp.statusCode = 400;
+		return resp.json({"error": "Invalid id format"});
 	}
 
-	return resp.json(data);
+	Order.findOne(
+		{_id: order_id},
+		async (err, data) => {
+			if (err || data === null){
+				data = {"error": "Order not found"};
+				resp.statusCode = 404;
+
+				return resp.json(data);
+			}
+
+			data = await data.populate("restaurant_id");
+
+			data = {
+				restaurant_id: data.restaurant_id,
+				food_ids: data.food_ids,
+				app_id: data.app_id
+			};
+			console.log(data);
+			return resp.json(data);
+		}
+	);
+
+	//let data;
+
+	//if (orders.hasOwnProperty(order_id)){
+	//	data = orders[order_id];
+	//}
+	//return resp.json(data);
 });
 
 module.exports = server;
