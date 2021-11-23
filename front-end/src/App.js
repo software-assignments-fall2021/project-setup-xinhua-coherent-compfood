@@ -6,8 +6,8 @@ import Header from "./component/Header";
 import Menu_item_list_screen from "./screen/Menu_item_list";
 import Order_confirmation_screen from "./screen/Order_confirmation";
 import Restaurant_list_screen from "./screen/Restaurant_list";
-import SignUp from "./signUp";
-import SignIn from "./signIn";
+import SignUp from "./screen/signUp";
+import SignIn from "./screen/signIn";
 
 import "./all.css";
 
