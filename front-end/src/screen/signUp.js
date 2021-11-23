@@ -2,7 +2,7 @@ import axios from "axios";
 import {useState, useEffect} from "react";
 
 import React from 'react';
-import './signUp.css';
+import '../signUp.css';
 
 const SignUp = () => {
     return (
