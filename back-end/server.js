@@ -1,13 +1,16 @@
-let app = require("./app");
-let config = require("./config");
 
-let server = app.listen(config.backend_bind_port, config.backend_bind_addr, () => {
-	console.log(`Backend available at ${config.backend_base_url}`);
+let app = require("./app");
+
+let listen_addr = "127.0.0.1";
+let listen_port = 61001;
+
+let server = app.listen(listen_port, listen_addr, () => {
+	console.log(`Backend available at http://${listen_addr}:${listen_port}`);
 });
 
 module.exports = {
 	stop: () => {
 		server.close();
 	},
-	base_url: config.backend_base_url
+	base_url: `http://${listen_addr}:${listen_port}`
 };
