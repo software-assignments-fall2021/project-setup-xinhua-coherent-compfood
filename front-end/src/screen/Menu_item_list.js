@@ -1,9 +1,8 @@
 import axios from "axios";
 import {useState, useEffect} from "react";
-import {BrowserRouter, Switch, Route, Link} from "react-router-dom";
 
 import config from "../config";
-import Menu_item from "../component/Menu_item";
+import MenuItem from "../component/Menu_item";
 
 let Menu_item_list = (props) => {
 	//MAGIC 12-46 items per restaurant
@@ -20,7 +19,7 @@ let Menu_item_list = (props) => {
 
 					for (let it of data){
 						console.log(it);
-						temp.push(<Menu_item name={it.name} description={it.description} price={it.price} />);
+						temp.push(<MenuItem name={it.name} description={it.description} price={it.price} />);
 					}
 					set_menu_items(temp);
 				})

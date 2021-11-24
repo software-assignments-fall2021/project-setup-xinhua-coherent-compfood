@@ -1,9 +1,8 @@
 import axios from "axios";
 import {useState, useEffect} from "react";
-import {BrowserRouter, Switch, Route, Link} from "react-router-dom";
 
 import config from "../config";
-import Delivery_app from "../component/Delivery_app";
+import DeliveryApp from "../component/Delivery_app";
 
 let Delivery_app_list = (props) => {
 	//MAGIC 5 delivery apps
@@ -20,7 +19,7 @@ let Delivery_app_list = (props) => {
 
 					for (let it of data){
 						console.log(it);
-						temp.push(<Delivery_app name={it.name} price={it.price} time={it.time} />);
+						temp.push(<DeliveryApp name={it.name} price={it.price} time={it.time} />);
 					}
 					set_delivery_apps(temp);
 				})
