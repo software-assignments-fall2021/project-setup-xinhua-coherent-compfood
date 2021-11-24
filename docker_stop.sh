@@ -1,10 +1,10 @@
 #!/bin/bash
 
-podman stop compfood_frontend
+docker stop compfood_frontend
 echo " >>> Frontend stopped <<<"
-podman stop compfood_backend
+docker stop compfood_backend
 echo " >>> Backend stopped <<<"
 
-podman container rm compfood_frontend
-podman container rm compfood_backend
+docker container rm compfood_frontend
+docker container rm compfood_backend
 echo " >>> Cleaned up containers <<<"
