@@ -6,13 +6,12 @@ import Restaurant from "../component/Restaurant";
 
 let RestaurantList = (props) => {
 	//MAGIC 10-12 restaurants
-	let num_restaurants = 10 + Math.floor(Math.random() * 3);
 
 	let [restaurants, set_restaurants] = useState([]);
 
 	useEffect(
 		() => {
-			axios(`${config.backend_base_url}/restaurants?rows=${num_restaurants}`)
+			axios(`${config.backend_base_url}/restaurants?rows=`+ 10 + Math.floor(Math.random() * 3))
 				.then((resp) => {
 					let data = resp.data;
 					let temp = [];

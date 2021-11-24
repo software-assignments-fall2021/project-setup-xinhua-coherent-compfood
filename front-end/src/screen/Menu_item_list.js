@@ -6,13 +6,12 @@ import MenuItem from "../component/Menu_item";
 
 let Menu_item_list = (props) => {
 	//MAGIC 12-46 items per restaurant
-	let num_menu_items = 12 + Math.floor(Math.random() * 35);
 
 	let [menu_items, set_menu_items] = useState([]);
 
 	useEffect(
 		() => {
-			axios(`${config.backend_base_url}/foods?rows=${num_menu_items}`)
+			axios(`${config.backend_base_url}/foods?rows=` + 12 + Math.floor(Math.random() * 35))
 				.then((resp) => {
 					let data = resp.data;
 					let temp = [];

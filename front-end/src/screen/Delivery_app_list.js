@@ -6,13 +6,12 @@ import DeliveryApp from "../component/Delivery_app";
 
 let Delivery_app_list = (props) => {
 	//MAGIC 5 delivery apps
-	let num_delivery_apps = 5;
-
+	
 	let [delivery_apps, set_delivery_apps] = useState([]);
 
 	useEffect(
 		() => {
-			axios(`${config.backend_base_url}/apps?rows=${num_delivery_apps}`)
+			axios(`${config.backend_base_url}/apps?rows=5`)
 				.then((resp) => {
 					let data = resp.data;
 					let temp = [];
