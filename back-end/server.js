@@ -1,16 +1,13 @@
 let app = require("./app");
+let config = require("./config");
 
-//have to expose on 0.0.0.0 instead of 127.0.0.1 for docker to work
-let listen_addr = "0.0.0.0";
-let listen_port = 61001;
-
-let server = app.listen(listen_port, listen_addr, () => {
-	console.log(`Backend available at http://${listen_addr}:${listen_port}`);
+let server = app.listen(config.backend_bind_port, config.backend_bind_addr, () => {
+	console.log(`Backend available at ${config.backend_base_url}`);
 });
 
 module.exports = {
 	stop: () => {
 		server.close();
 	},
-	base_url: `http://${listen_addr}:${listen_port}`
+	base_url: config.backend_base_url
 };
