@@ -24,7 +24,7 @@ describe("/order/:order_id GET endpoint", () => {
 
 	it("will have exactly the expected fields", async () => {
 		let data = (await request(`/order/${order_id}`))[0];
-		let expected_keys = ["restaurant_id", "food_ids", "app_id"];
+		let expected_keys = ["id", "restaurant_id", "food_ids", "app_id"];
 
 		assert.hasAllKeys(data, expected_keys);
 	});
@@ -32,20 +32,24 @@ describe("/order/:order_id GET endpoint", () => {
 	it("will have the correct types for each field", async () => {
 		let data = (await request(`/order/${order_id}`))[0];
 
+		assert.typeOf(data["id"], "string");
+		assert.equal(data["id"].match(/^[0-9a-f]{24}$/) !== null, true);
+
+		//TODO somehow do a "deep type check" since we return values as subdocuments
 		//TODO should really be a single element but need to figure out how to make a "null id"
 		assert.typeOf(data["restaurant_id"], "array");
 		for (let it of data["restaurant_id"]){
-			assert.equal(it.match(/^[0-9a-f]{24}$/) !== null, true);
+			assert.equal(it["id"].match(/^[0-9a-f]{24}$/) !== null, true);
 		}
 
 		assert.typeOf(data["food_ids"], "array");
 		for (let it of data["food_ids"]){
-			assert.typeOf(it, "number");
+			assert.equal(it["id"].match(/^[0-9a-f]{24}$/) !== null, true);
 		}
 
 		assert.typeOf(data["app_id"], "array");
 		for (let it of data["app_id"]){
-			assert.equal(it.match(/^[0-9a-f]{24}$/) !== null, true);
+			assert.equal(it["id"].match(/^[0-9a-f]{24}$/) !== null, true);
 		}
 	});
 
