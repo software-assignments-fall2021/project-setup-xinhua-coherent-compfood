@@ -1,11 +1,10 @@
-import {useState, useEffect} from "react";
-import {BrowserRouter, Switch, Route, Link} from "react-router-dom";
+import {BrowserRouter, Switch, Route} from "react-router-dom";
 
 import Delivery_app_screen from "./screen/Delivery_app_list";
 import Header from "./component/Header";
 import Menu_item_list_screen from "./screen/Menu_item_list";
 import Order_confirmation_screen from "./screen/Order_confirmation";
-import Restaurant_list_screen from "./screen/Restaurant_list";
+import RestaurantListScreen from "./screen/Restaurant_list";
 
 import "./all.css";
 
@@ -31,7 +30,7 @@ let App = (props) => {
 					{//list of restaurants close to user
 					}
 					<Route path="/">
-						<Restaurant_list_screen />
+						<RestaurantListScreen />
 					</Route>
 				</Switch>
 			</BrowserRouter>
