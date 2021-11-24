@@ -38,6 +38,19 @@ jobs:
           cd front-end
           npm install # install all dependencies listed in package.json
           npm run build # have react build the stand-alone front-end code
+  build-docker-images:
+    docker:
+      - image: cimg/base:2021.04 # latest base image from https://circleci.com/docs/2.0/circleci-images/ at the time of writing
+        # auth:
+        #   username: mydockerhub-user
+        #   password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - run: echo "this is the build docker image job"
+      - run: |
+          ./docker_build.sh
+          pwd # for debugging: show current working directory
+          ls # for debugging: show sub-directories in here
 
 # Orchestrate our job run sequence
 workflows:
@@ -47,3 +60,6 @@ workflows:
   build-front-end:
     jobs:
       - build-react-js
+  build-deploy-containers:
+    jobs:
+      - build-docker-images
