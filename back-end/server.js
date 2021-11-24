@@ -1,6 +1,7 @@
 let app = require("./app");
 
-let listen_addr = "127.0.0.1";
+//have to expose on 0.0.0.0 instead of 127.0.0.1 for docker to work
+let listen_addr = "0.0.0.0";
 let listen_port = 61001;
 
 let server = app.listen(listen_port, listen_addr, () => {
