@@ -4,7 +4,7 @@ import {useState, useEffect} from "react";
 import config from "../config";
 import MenuItem from "../component/Menu_item";
 
-let Menu_item_list = (props) => {
+let MenuItemList = (props) => {
 	//MAGIC 12-46 items per restaurant
 
 	let [menu_items, set_menu_items] = useState([]);
@@ -44,4 +44,4 @@ let Menu_item_list = (props) => {
 	);
 };
 
-export default Menu_item_list;
+export default MenuItemList;
