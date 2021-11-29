@@ -156,6 +156,7 @@ server.get("/restaurants", async (req, resp) => {
 server.post("/new_order", async (req, resp) => {
 	let data = gen_new_order();
 
+<<<<<<< HEAD
 	return resp.json(data);
 });
 
@@ -173,6 +174,51 @@ server.get("/order/:order_id", async (req, resp) => {
 	}
 
 	return resp.json(data);
+=======
+server.post('/register', (req, res) => {
+    // TODO: implement registration
+    let flag = 0;
+    
+    const User = mongoose.model('User');
+    User.find((err, result) => {
+        for(let i = 0; i < result.length; i++){
+            if(req.body.username === result[i].username){
+                flag = 1;
+                res.render('error', {message: 'Username already exsists' });
+            }
+        } 
+        
+        if(req.body.password.length < 8){
+            if(flag === 0){
+                flag = 1;
+                res.render('error', {message: 'Password must be 8+ characters long'});
+            }
+        }
+
+        if(flag === 0){
+            const myPlaintextPassword = req.body.password;
+            const saltRounds = 10;
+            bcrypt.hash(myPlaintextPassword, saltRounds, function(err, hash) {
+                const user = new User({
+                    username: req.body.username,
+                    password: hash
+                });
+
+                req.session.regenerate((err) => {
+                    if (!err) {
+                    req.session.user = user;
+                    } else {
+                    console.log('error'); 
+                    res.send('an error occurred, please see the server logs for more information');
+                    }
+                  });
+                user.save(() => { 
+                    res.redirect('/');	
+                });
+            });
+        }   
+    });
+>>>>>>> 10ebd6b (Fixed username error message)
 });
 
 module.exports = server;
