@@ -5,4 +5,10 @@ const User = new mongoose.Schema({
 });
 
 mongoose.model('User', User);
-mongoose.connect('mongodb://localhost/compfood');
+
+const MONGODB_URI = 'mongodb+srv://swe474.bimfy.mongodb.net/swe474'
+
+ mongoose.connect(MONGODB_URI  || 'mongodb://localhost/compfood', {
+       useNewUrlParser: true,
+       useUnifiedTopology: true
+});
