@@ -1,4 +1,3 @@
-
 let app = require("./app");
 
 let listen_addr = "127.0.0.1";

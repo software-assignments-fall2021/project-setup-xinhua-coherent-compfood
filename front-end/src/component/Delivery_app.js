@@ -1,6 +1,3 @@
-import {useState, useEffect} from "react";
-import {BrowserRouter, Switch, Route, Link} from "react-router-dom";
-
 import "../all.css";
 
 let Delivery_app = (props) => {

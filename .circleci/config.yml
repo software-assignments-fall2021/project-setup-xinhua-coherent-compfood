@@ -54,7 +54,6 @@ jobs:
           ./docker_build.sh
           pwd # for debugging: show current working directory
           ls # for debugging: show sub-directories in here
-
 # Orchestrate our job run sequence
 workflows:
   build-and-test-back-end:

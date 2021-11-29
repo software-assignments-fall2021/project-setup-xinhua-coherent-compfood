@@ -1,19 +1,17 @@
 import axios from "axios";
 import {useState, useEffect} from "react";
-import {BrowserRouter, Switch, Route, Link} from "react-router-dom";
 
 import config from "../config";
 import Restaurant from "../component/Restaurant";
 
-let Restaurant_list = (props) => {
+let RestaurantList = (props) => {
 	//MAGIC 10-12 restaurants
-	let num_restaurants = 10 + Math.floor(Math.random() * 3);
 
 	let [restaurants, set_restaurants] = useState([]);
 
 	useEffect(
 		() => {
-			axios(`${config.backend_base_url}/restaurants?rows=${num_restaurants}`)
+			axios(`${config.backend_base_url}/restaurants?rows=`+ 10 + Math.floor(Math.random() * 3))
 				.then((resp) => {
 					let data = resp.data;
 					let temp = [];
@@ -40,4 +38,4 @@ let Restaurant_list = (props) => {
 	);
 };
 
-export default Restaurant_list;
+export default RestaurantList;
