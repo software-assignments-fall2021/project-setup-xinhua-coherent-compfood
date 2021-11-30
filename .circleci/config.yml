@@ -52,6 +52,9 @@ jobs:
       - run: echo "this is the build docker image job"
       - run: |
           ./docker_build.sh
+          echo "$DOCKER_PAT" | grep -o "^[0-9a-f-]*" | docker login -u huangascan --password-stdin
+          docker push -t compfood_frontend huangascan/swe474-compfood-frontend
+          docker push -t compfood_backend huangascan/swe474-compfood-backend
           pwd # for debugging: show current working directory
           ls # for debugging: show sub-directories in here
 
