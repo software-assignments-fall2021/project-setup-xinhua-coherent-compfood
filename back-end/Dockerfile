@@ -6,7 +6,6 @@ COPY . /root
 RUN ls -la
 
 RUN npm install
-RUN npm run test-cov
 
 EXPOSE 61001
 

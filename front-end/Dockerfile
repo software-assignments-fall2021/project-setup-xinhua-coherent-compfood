@@ -6,6 +6,7 @@ COPY . /root
 RUN ls -la
 
 RUN npm install
+RUN npm run build
 
 EXPOSE 61002
 

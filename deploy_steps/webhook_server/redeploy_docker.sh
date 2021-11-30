@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd ../..
+cd ~/repo
 
 ./docker_pull.sh
 ./docker_stop.sh
