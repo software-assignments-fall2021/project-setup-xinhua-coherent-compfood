@@ -76,6 +76,9 @@ server.post("/github-webhook", async (req, resp) => {
 		let event_type = req.get("X-GitHub-Event") ?? "";
 		let challenge_hmac = req.get("X-Hub-Signature-256") ?? "";
 
+		let repo_ref_val = "software-students-fall2021/project-setup-xinhua-coherent-compfood";
+		let context_ref_val = "ci/circleci: build-docker-images";
+
 		let payload = req.body;
 		//handle empty body
 		if (typeof payload === "object"){
@@ -88,8 +91,16 @@ server.post("/github-webhook", async (req, resp) => {
 			if (event_type === "status"){
 				let unlock = await mutex.acquire();
 
-				if (data.state === "success"){
-					update_available = true;
+				if (data.state === "success"
+						&& data.repository.full_name === repo_ref_val
+						&& data.context === context_ref_val){
+					//TODO keep only master branch in filter func after docker deploy is successful
+					if (data.branches.filter((ele) => {return ele.name === "ah-continuous-deployment" || ele.name === "master";}).length){
+						update_available = true;
+					}
+					else{
+						console.log("no branches given match 'master'");
+					}
 				}
 				redeploy_docker();
 
