@@ -5,7 +5,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "pm2 start pm2.config.js",
+    "stop": "pm2 stop pm2.config.js"
   },
   "dependencies": {
     "async-mutex": "^0.3.2",
@@ -15,5 +16,7 @@
     "express": "^4.17.1",
     "morgan": "^1.10.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "pm2": "^5.1.2"
+  }
 }
