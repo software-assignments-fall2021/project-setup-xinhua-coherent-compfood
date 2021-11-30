@@ -1,9 +1,21 @@
-const mongoose = require("mongoose");
 const {MongoMemoryServer} = require("mongodb-memory-server");
+const mongoose = require("mongoose");
 
 //dotenv loading .env
 require("dotenv").config({
 	silent: true
+});
+
+const App = new mongoose.Schema({
+	name: { type: String, default: null }
+});
+
+const Order = new mongoose.Schema({
+	//this is an array of ids because otherwise new Order(...) doesn't add this key
+	restaurant_id: [{ type: mongoose.ObjectId, ref: "Restaurant" }],
+	food_ids: [{ type: mongoose.ObjectId, ref: "Food" }],
+	//see comment above restaurant_id
+	app_id: [{ type: mongoose.ObjectId, ref: "App" }]
 });
 
 const User = new mongoose.Schema({
@@ -19,7 +31,7 @@ const Food = new mongoose.Schema({
 });
 
 const Restaurant = new mongoose.Schema({
-	name: {type: String, default: null},
+	name: { type: String, default: null },
 	menu: [Food]
 });
 
@@ -69,5 +81,9 @@ else{
 module.exports = {
 	User: mongoose.model("User", User),
 	Restaurant: mongoose.model("Restaurant", Restaurant),
-	Food: mongoose.model("Food", Food)
+	Food: mongoose.model("Food", Food),
+	Order: mongoose.model("Order", Order),
+	App: mongoose.model("App", App),
+
+	ObjectId: mongoose.Types.ObjectId
 };
