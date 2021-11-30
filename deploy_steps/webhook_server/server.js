@@ -73,6 +73,7 @@ let check_hmac = (payload, challenge_hmac) => {
 
 server.post("/github-webhook", async (req, resp) => {
 	try{
+		let event_type = req.get("X-GitHub-Event") ?? "";
 		let challenge_hmac = req.get("X-Hub-Signature-256") ?? "";
 
 		let payload = req.body;
@@ -84,7 +85,7 @@ server.post("/github-webhook", async (req, resp) => {
 		if (check_hmac(payload, challenge_hmac)){
 			let data = JSON.parse(payload);
 
-			if (data?.action === "status"){
+			if (event_type === "status"){
 				let unlock = await mutex.acquire();
 
 				if (data.state === "success"){
@@ -94,7 +95,7 @@ server.post("/github-webhook", async (req, resp) => {
 
 				unlock();
 			}
-			else if (data?.action === "push"){
+			else if (event_type === "push"){
 				let unlock = await mutex.acquire();
 
 				//currently do nothing, we can use this later if we want though
