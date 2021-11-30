@@ -6,6 +6,7 @@ import MenuItemListScreen from "./screen/MenuItemList";
 import OrderConfirmationScreen from "./screen/OrderConfirmation";
 import RestaurantListScreen from "./screen/RestaurantList";
 import signup from "./screen/signIn";
+import login from "./screen/signUp";
 
 import "./all.css";
 
@@ -21,6 +22,9 @@ let App = (props) => {
 					}
 					
 					{//list of menu items from restaurant chosen
+					}
+					{				
+					<Route path="/Login" component={login} />
 					}
 					<Route path="/restaurant/:order_id" component={MenuItemListScreen} />
 
