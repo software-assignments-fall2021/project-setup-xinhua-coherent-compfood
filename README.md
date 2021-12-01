@@ -54,7 +54,7 @@ npm install
 npm start
 ```
 
-## Back-end
+## Back-end + Database
 
 We are using `npm` as our package manager and Express as our framework. Steps to run:
 
@@ -70,13 +70,23 @@ cd back-end
 npm install
 ```
 
-3. launch Express server (accessable at [http://127.0.0.1:61001](http://127.0.0.1:61001))
+3. ensure that there is a `.env` file in the current working directory that looks like this with the appropriate values filled in
+
+```
+MONGO_DB_URL={url here}
+MONGO_DB_USERNAME={username here}
+MONGO_DB_PASSWORD={password here}
+
+JWT_SECRET={jwt secret here}
+```
+
+4. launch Express server (accessable at [http://127.0.0.1:61001](http://127.0.0.1:61001))
 
 ```
 npm start
 ```
 
-## Database/Deploy
+## Deploy
 
 * TBD
 
@@ -94,7 +104,7 @@ Steps to test:
 
 4. make sure everything looks ok and nothing seems "broken" in terms of css/styling
 
-## Back-end
+## Back-end + Database
 
 Steps to test:
 
@@ -104,7 +114,7 @@ Steps to test:
 
 3. run `npm run test-cov` in the back-end directory for code coverage (+ unit testing)
 
-## Database/Deploy
+## Deploy
 
 * TBD
 
