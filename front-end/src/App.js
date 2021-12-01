@@ -5,8 +5,8 @@ import Header from "./component/Header";
 import MenuItemListScreen from "./screen/MenuItemList";
 import OrderConfirmationScreen from "./screen/OrderConfirmation";
 import RestaurantListScreen from "./screen/RestaurantList";
-import signup from "./screen/signIn";
-import login from "./screen/signUp";
+import login from "./screen/signIn";
+import signup from "./screen/signUp";
 
 import "./all.css";
 
