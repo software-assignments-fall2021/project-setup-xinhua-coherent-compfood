@@ -3,7 +3,7 @@ let crypto = require("crypto");
 let express = require("express");
 let morgan = require("morgan");
 let mutex_lib = require("async-mutex");
-let proc_exec = require("child_process").exec;
+let proc_exec = require("child_process").execFile;
 
 let server = express();
 
@@ -38,7 +38,7 @@ let redeploy_docker = async () => {
 	console.log("running redeploy", deploying, update_available);
 	unlock();
 
-	proc_exec("/bin/bash ./redeploy_docker.sh", async (err, stdout, stderr) => {
+	proc_exec("/home/app/repo/deploy_steps/webhook_server/redeploy_docker.sh", {timeout: 75 * 1000}, async (err, stdout, stderr) => {
 		if (err){
 			//do nothing and fail silently :(
 		}
