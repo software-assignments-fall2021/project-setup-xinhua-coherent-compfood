@@ -8,6 +8,7 @@ import RestaurantListScreen from "./screen/RestaurantList";
 import login from "./screen/signIn";
 import signup from "./screen/signUp";
 import SigninButton from "./component/signin_button";
+import SignupButton from "./component/signup_button";
 
 import "./all.css";
 
@@ -40,7 +41,7 @@ let App = (props) => {
 					}
 					<Route path="/">
 						<SigninButton />
-
+						<SignupButton />
 						<RestaurantListScreen />
 					</Route>
 				</Switch>
