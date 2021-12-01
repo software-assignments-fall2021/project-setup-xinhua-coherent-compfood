@@ -7,6 +7,7 @@ import OrderConfirmationScreen from "./screen/OrderConfirmation";
 import RestaurantListScreen from "./screen/RestaurantList";
 import login from "./screen/signIn";
 import signup from "./screen/signUp";
+import SigninButton from "./component/signin_button";
 
 import "./all.css";
 
@@ -14,7 +15,6 @@ let App = (props) => {
 	return (
 		<div>
 			<Header />
-
 			<BrowserRouter>
 				<Switch>
 					{
@@ -39,6 +39,8 @@ let App = (props) => {
 					{//list of restaurants close to user
 					}
 					<Route path="/">
+						<SigninButton />
+
 						<RestaurantListScreen />
 					</Route>
 				</Switch>
