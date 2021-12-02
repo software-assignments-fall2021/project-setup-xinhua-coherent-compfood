@@ -51,7 +51,18 @@ jobs:
           docker_layer_caching: true
       - run: echo "this is the build docker image job"
       - run: |
+          #switch to production config
+          cp prod_config.js back-end/config.js
+          cp prod_config.js front-end/src/config.js
+          #build images and login to docker
           ./docker_build.sh
+          echo "$DOCKER_PAT" | grep -o "^[0-9a-f-]*" | docker login -u huangascan --password-stdin
+          #workaround not being able to push a certain tag
+          docker tag compfood_frontend huangascan/swe474-compfood-frontend
+          docker tag compfood_backend huangascan/swe474-compfood-backend
+          #actually push
+          docker push huangascan/swe474-compfood-frontend
+          docker push huangascan/swe474-compfood-backend
           pwd # for debugging: show current working directory
           ls # for debugging: show sub-directories in here
 
