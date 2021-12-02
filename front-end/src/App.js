@@ -19,7 +19,7 @@ let App = (props) => {
 			<BrowserRouter>
 				<Switch>
 					{
-					<Route path="/SignIn" component={signup} />
+					<Route path="/Signup" component={signup} />
 					}
 					
 					{//list of menu items from restaurant chosen
@@ -43,6 +43,7 @@ let App = (props) => {
 						<SigninButton />
 						<SignupButton />
 						<RestaurantListScreen />
+
 					</Route>
 				</Switch>
 			</BrowserRouter>

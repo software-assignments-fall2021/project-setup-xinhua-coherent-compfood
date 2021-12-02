@@ -1,6 +1,6 @@
 import React from "react";
 import{ useHistory} from "react-router-dom";
-//import "../signIn_button.css";
+import "../signUp_button.css";
 
 function SignupButton (){
     const history = useHistory();
@@ -11,9 +11,9 @@ function SignupButton (){
         onClick={() => {
             history.push("/signup");
         }}
-        class="button-73" role="button"
+        class="button-70" role="button"
         >
-          Sign In  
+          Signup  
         </button>
     )
 }

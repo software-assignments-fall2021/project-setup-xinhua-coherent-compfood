@@ -1,5 +1,5 @@
 /* CSS */
-.button-73 {
+.button-70 {
   appearance: none;
   background-color: #FFFFFF;
   border-radius: 40em;
@@ -24,22 +24,22 @@
   -webkit-user-select: none;
   touch-action: manipulation;
   position: absolute;
-	left: 1050px;
+	left: 850px;
   top: 50px;
 }
 
-.button-73:hover {
+.button-70:hover {
   background-color: #FFC229;
   box-shadow: #FF6314 0 -6px 8px inset;
   transform: scale(1.125);
 }
 
-.button-73:active {
+.button-70:active {
   transform: scale(1.025);
 }
 
 @media (min-width: 768px) {
-  .button-73 {
+  .button-70 {
     font-size: 1.5rem;
     padding: .75rem 2rem;
   }
