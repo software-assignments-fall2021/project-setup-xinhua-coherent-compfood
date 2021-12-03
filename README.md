@@ -1,8 +1,11 @@
 # CompFood
 
-## Vision
+## Badges
 
-## Statement
+CircleCI build: [![CircleCI badge](https://circleci.com/gh/software-students-fall2021/project-setup-xinhua-coherent-compfood/tree/master.svg?style=svg)](https://circleci.com/gh/software-students-fall2021/project-setup-xinhua-coherent-compfood/tree/master)
+
+## Vision Statement
+
 Our team is aiming for at minimum a functioning app that gathers prices from different meal delivery apps (data might be dummy data), displays different meal delivery options,redirecting the user to their preferred option.
 
 
