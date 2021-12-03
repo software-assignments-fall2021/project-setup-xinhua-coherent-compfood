@@ -1,5 +1,5 @@
 /* CSS */
-.button-73 {
+.my-signin_button {
   appearance: none;
   background-color: #FFFFFF;
   border-radius: 40em;
@@ -28,18 +28,18 @@
   top: 50px;
 }
 
-.button-73:hover {
+.my-signin_button:hover {
   background-color: #FFC229;
   box-shadow: #FF6314 0 -6px 8px inset;
   transform: scale(1.125);
 }
 
-.button-73:active {
+.my-signin_button:active {
   transform: scale(1.025);
 }
 
 @media (min-width: 768px) {
-  .button-73 {
+  .my-signin_button {
     font-size: 1.5rem;
     padding: .75rem 2rem;
   }

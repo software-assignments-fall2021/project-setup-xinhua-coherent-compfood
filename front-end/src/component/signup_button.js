@@ -11,7 +11,7 @@ function SignupButton (){
         onClick={() => {
             history.push("/signup");
         }}
-        class="button-70" role="button"
+        class="my-signup-button" 
         >
           Signup  
         </button>
