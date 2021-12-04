@@ -7,6 +7,8 @@ import OrderConfirmationScreen from "./screen/OrderConfirmation";
 import RestaurantListScreen from "./screen/RestaurantList";
 import login from "./screen/signIn";
 import signup from "./screen/signUp";
+import SigninButton from "./component/signin_button";
+import SignupButton from "./component/signup_button";
 
 import "./all.css";
 
@@ -14,11 +16,10 @@ let App = (props) => {
 	return (
 		<div>
 			<Header />
-
 			<BrowserRouter>
 				<Switch>
 					{
-					<Route path="/SignIn" component={signup} />
+					<Route path="/Signup" component={signup} />
 					}
 					
 					{//list of menu items from restaurant chosen
@@ -39,7 +40,10 @@ let App = (props) => {
 					{//list of restaurants close to user
 					}
 					<Route path="/">
+						<SigninButton />
+						<SignupButton />
 						<RestaurantListScreen />
+
 					</Route>
 				</Switch>
 			</BrowserRouter>

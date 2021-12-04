@@ -47,7 +47,7 @@ div {
 
 .button {
 	position: absolute;
-	left: 800px;
+	left: 100px;
 	background-color: black;
 	color: white;
 	padding: 5px 15px;
@@ -166,4 +166,6 @@ div {
 
 .header {
 	padding: 3em;
+
 }
+
