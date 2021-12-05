@@ -9,7 +9,7 @@ import login from "./screen/signIn";
 import signup from "./screen/signUp";
 import SigninButton from "./component/signin_button";
 import SignupButton from "./component/signup_button";
-
+import Sidebar from "./component/Sidebar";
 import "./all.css";
 
 let App = (props) => {
@@ -17,6 +17,7 @@ let App = (props) => {
 		<div>
 			<Header />
 			<BrowserRouter>
+				<Sidebar />
 				<Switch>
 					{
 					<Route path="/Signup" component={signup} />
