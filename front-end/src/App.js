@@ -1,7 +1,7 @@
 import {BrowserRouter, Switch, Route} from "react-router-dom";
 
 import DeliveryAppScreen from "./screen/DeliveryAppList";
-import Header from "./component/Header";
+//import Header from "./component/Header";
 import MenuItemListScreen from "./screen/MenuItemList";
 import OrderConfirmationScreen from "./screen/OrderConfirmation";
 import RestaurantListScreen from "./screen/RestaurantList";
