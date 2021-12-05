@@ -18,6 +18,9 @@ const SignIn = () => {
                   Sign in
               </button>
           </div>
+          <div>
+            <p>New to CompFood? Click <a href="/signup">here</a> to make an account.</p>
+          </div>
       </div>
     );
 }

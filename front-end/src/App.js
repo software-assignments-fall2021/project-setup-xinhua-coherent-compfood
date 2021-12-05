@@ -22,13 +22,13 @@ let App = (props) => {
 				<Sidebar />
 				<Switch>
 					{
-					<Route path="/Signup" component={signup} />
+					<Route path="/signup" component={signup} />
 					}
 					
 					{//list of menu items from restaurant chosen
 					}
 					{				
-					<Route path="/Login" component={login} />
+					<Route path="/login" component={login} />
 					}
 					<Route path="/restaurant/:order_id" component={MenuItemListScreen} />
 
