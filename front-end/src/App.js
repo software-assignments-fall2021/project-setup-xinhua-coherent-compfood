@@ -10,6 +10,8 @@ import signup from "./screen/signUp";
 import SigninButton from "./component/signin_button";
 import SignupButton from "./component/signup_button";
 import Sidebar from "./component/Sidebar";
+import UserProfile from "./screen/UserProfile";
+
 import "./all.css";
 
 let App = (props) => {
@@ -37,6 +39,9 @@ let App = (props) => {
 					{//waiting for external delivery app to confirm the order
 					}
 					<Route path="/processing/:order_id" component={OrderConfirmationScreen} />
+					{//User profile that you can view name, username, and profile picture.
+					}
+					<Route path="/user-profile" component={UserProfile} />
 
 					{//list of restaurants close to user
 					}
