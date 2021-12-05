@@ -253,7 +253,8 @@ span {
 
 .RestaurantList,
 .MenuItemListScreen,
-.products {
+.products,
+.UserProfile {
     display: flex;
     height: 90vh;
     align-items: center;
