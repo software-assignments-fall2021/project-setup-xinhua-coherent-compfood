@@ -25,9 +25,9 @@ function Navbar() {
                     <Link to='/home' className='menu-bars'>
                         <img className="imgcenter" src="/Logo.png" alt="Home Logo"  />
                     </Link>
-                    {/* */}
+                    {/*Dark/Light mode button*/}
                     <Link to='#' className='menu-bars'>
-                        <button onClick={clickMe} type="button" >Dark/Light Mode</button>
+                        <button onClick={clickMe} type="button" className="button">Dark/Light Mode</button>
                     </Link>
                 </div>
                 {/*The sidebar menu items*/}
