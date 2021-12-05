@@ -17,7 +17,7 @@ import "./all.css";
 let App = (props) => {
 	return (
 		<div>
-			<Header />
+			{/*<Header />*/}
 			<BrowserRouter>
 				<Sidebar />
 				<Switch>

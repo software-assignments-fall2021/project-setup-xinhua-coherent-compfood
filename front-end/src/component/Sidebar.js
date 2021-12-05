@@ -15,13 +15,19 @@ function Navbar() {
         <>
             {/*Makes all the icons of sidebar and hamburger sign black*/}
             <IconContext.Provider value={{ color: '#000' }}>
-                {/*The hamburger sign visible when sidebar not opened */}
+                {/*The new header */}
                 <div className='navbar'>
+                    {/*3 Bar that opens the sidebar*/}
                     <Link to='#' className='menu-bars'>
                         <FaIcons.FaBars onClick={showSidebar} />
                     </Link>
+                    {/*CompFood Logo that directs to Home*/}
                     <Link to='/home' className='menu-bars'>
                         <img className="imgcenter" src="/Logo.png" alt="Home Logo"  />
+                    </Link>
+                    {/* */}
+                    <Link to='#' className='menu-bars'>
+                        <button onClick={clickMe} type="button" >Dark/Light Mode</button>
                     </Link>
                 </div>
                 {/*The sidebar menu items*/}
@@ -51,4 +57,16 @@ function Navbar() {
     );
 }
 
+let mode = 'light';
+
+function clickMe(){
+	if(mode === 'light'){
+		mode = 'dark';
+	}
+	else{
+		mode = 'light';
+	}
+	
+	console.log(mode);
+}
 export default Navbar;

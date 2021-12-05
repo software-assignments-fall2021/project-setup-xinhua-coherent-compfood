@@ -168,7 +168,7 @@ div {
     padding: 3em;
 }
 
-/*-----SIDEBAR STYLINGS-----*/
+/*----------SIDEBAR STYLINGS----------*/
 .navbar {
     background-color: white;
     height: 80px;
@@ -222,7 +222,7 @@ div {
     }
 
         .nav-text a:hover {
-            background-color: #1a83ff;
+            background-color: orange;
         }
 
 .nav-menu-items {
@@ -261,11 +261,16 @@ span {
     justify-content: center;
     font-size: 3rem;
 }
-/*--------------------------*/
+/*------------------------------------*/
 
-img .center {
+.imgcenter {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 50%;
+
+}
+
+.divcenter {
+        margin: auto;
+        padding: 10px;
 }
