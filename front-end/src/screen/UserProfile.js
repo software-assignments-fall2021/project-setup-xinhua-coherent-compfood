@@ -1,5 +1,5 @@
 import React from 'react';
-import config from "../config";
+//import config from "../config";
 
 let UserProfile = (props) =>{
     /*let [userinfo, set_ = useState([]);
