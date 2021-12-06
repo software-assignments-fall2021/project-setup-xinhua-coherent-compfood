@@ -294,9 +294,13 @@ span {
         margin: auto;
         padding: 20px;
         width: 100%;
-        text-align: center;
 }
 
     .divcenter > p {
         padding: 10px;
+    }
+
+    .divcenter > h2 {
+        padding: 20px;
+        text-align: center;
     }
