@@ -33,6 +33,7 @@ function Navbar() {
                         <button onClick={clickMe} type="button" className="button">Dark/Light Mode</button>
                     </Link>
                 </div>
+                
                 {/*The sidebar menu items*/}
                 <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
                     <ul className='nav-menu-items' onClick={showSidebar}>
@@ -55,6 +56,7 @@ function Navbar() {
                         })}
                     </ul>
                 </nav>
+                <div className={sidebar ? 'sidebarOverlay active' : 'sidebarOverlay'}></div>
             </IconContext.Provider>
         </>
     );
