@@ -8,7 +8,7 @@ let Order_confirmation = (props) => {
 				left: 125
 			}}>Your Order Has Been Placed!</p>
 			<div className="container">
-          	<img src={orderPic} style={{ alignSelf: 'center' }}/>
+          	<img src={orderPic} style={{ alignSelf: 'center' }}alt="cooking in progress"/>
         	</div>
 			<p style={{
 				fontSize: 40,
