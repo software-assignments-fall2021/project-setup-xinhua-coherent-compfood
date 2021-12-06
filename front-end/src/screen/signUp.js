@@ -25,6 +25,9 @@ const SignUp = () => {
                   Sign up
               </button>
           </div>
+          <div>
+            <p>Already have an account with CompFood? <a href="/login">Log In</a></p>
+          </div>
       </div>
     );
 }
