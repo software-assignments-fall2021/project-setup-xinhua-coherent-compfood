@@ -1,4 +1,4 @@
-# CompFood
+# CompFood (deployed at [https://swe474.xor.fyi](https://swe474.xor.fyi))
 
 ## Badges
 
@@ -7,7 +7,6 @@ CircleCI build: [![CircleCI badge](https://circleci.com/gh/software-students-fal
 ## Vision Statement
 
 Our team is aiming for at minimum a functioning app that gathers prices from different meal delivery apps (data might be dummy data), displays different meal delivery options,redirecting the user to their preferred option.
-
 
 ## Themes
 
@@ -33,7 +32,7 @@ Our team is aiming for at minimum a functioning app that gathers prices from dif
 * We are all college students who use meal delivery apps and wanted a way to find the best prices
 * For collaboration https://github.com/software-students-fall2021/project-setup-xinhua-coherent-compfood/blob/master/CONTRIBUTING.md
 
-# Building (for development only)
+# Building (for development only, except for deploy)
 
 ## Front-end
 
@@ -91,7 +90,29 @@ npm start
 
 ## Deploy
 
-* TBD
+1. Get a VPS with a Ubuntu 26.01 image
+
+2. Obtain the following files that will be necessary in later steps:
+
+```
+.env = (see backend and database steps)
+pm2.config.js = deploy_steps/webhook_server/pm2.config.js with placeholder values replaced
+certs.tar.gz = gzipped tar archive with fullchain.pem and privkey.pem corresponding to a valid SSL cert for the domain you are using
+```
+
+3. Replace `swe474.xor.fyi` with the domain name you are using in the nginx configs located in `deploy_steps/config`
+
+4. Run the script `deploy_steps/1.setup_ubuntu_21_06` as `root` on the VPS
+
+5. Run the script `deploy_steps/2.make_app_user` as `root` on the VPS
+
+6. Run the script `deploy_steps/3.pull_repo` as `app` on the VPS
+
+7. Run the script `deploy_steps/4.setup_nginx` as `root` on the VPS
+
+8. Trigger a build on CircleCI with passing docker job
+
+9. Add DNS A record to point from domain to VPS ip
 
 # Testing
 
@@ -119,7 +140,9 @@ Steps to test:
 
 ## Deploy
 
-* TBD
+1. Go to `https://{the domain you are using here}`
+
+2. Test functionality as you would test the frontend
 
 # Links
 
