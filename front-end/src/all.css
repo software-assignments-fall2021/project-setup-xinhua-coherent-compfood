@@ -27,6 +27,13 @@ div {
     background-color: rgb(255, 255, 255);
 }
 
+.prompt{
+    font-size: 40px;
+	position: relative;
+	left: 125px;
+}
+
+
 .relative-pos {
     position: relative;
 }
