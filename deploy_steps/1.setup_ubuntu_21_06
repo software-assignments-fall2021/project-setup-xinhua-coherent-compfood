@@ -1,0 +1,9 @@
+apt-get update
+
+#NOTE would normally not take this shortcut, but this is a school project and we have little time left
+curl -fsSL https://deb.nodesource.com/setup_14.x | bash -
+
+apt-get install -y npm2deb nodejs
+apt-get install -y nginx
+
+useradd -mU app
