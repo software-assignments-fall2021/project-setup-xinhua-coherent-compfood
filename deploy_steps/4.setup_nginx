@@ -1,0 +1,19 @@
+mkdir /etc/nginx/ssl
+
+openssl dhparam -out /etc/nginx/ssl/dhparam.pem 4096
+
+cp /home/app/repo/deploy_steps/config/* /etc/nginx/conf.d/
+
+read -p "sftp ssl certs to certs.tar.gz"
+if [[ ! -f certs.tar.gz ]]; then
+	exit 1
+fi
+
+cd /etc/nginx/ssl
+tar -xf ~/certs.tar.gz
+
+cd ~
+shred certs.tar.gz
+rm certs.tar.gz
+
+nginx -t && service nginx restart

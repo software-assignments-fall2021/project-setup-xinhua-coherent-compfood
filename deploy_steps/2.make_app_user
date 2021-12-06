@@ -1,0 +1,13 @@
+userdel app
+rm -r /home/app
+
+useradd -mU app
+chsh -s /bin/bash app
+usermod -aG docker app
+
+mkdir /home/app/.ssh
+chmod 700 /home/app/.ssh
+cp ~/.ssh/authorized_keys /home/app/.ssh/
+chown -R app:app /home/app/.ssh
+
+su app
