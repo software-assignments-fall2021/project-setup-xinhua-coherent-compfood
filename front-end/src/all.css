@@ -250,12 +250,12 @@ div {
     left: 0;
     z-index: -1;
 }
-.sidebarOverlay.active {
+    .sidebarOverlay.active {
 
-    opacity: .6;
-    transition: 350ms;
-    z-index: 1;
-}
+        opacity: .6;
+        transition: 350ms;
+        z-index: 1;
+    }
 
 
 span {
@@ -297,6 +297,6 @@ span {
         text-align: center;
 }
 
-.divcenter > p {
-    padding: 10px;
-}
+    .divcenter > p {
+        padding: 10px;
+    }
