@@ -114,6 +114,26 @@ certs.tar.gz = gzipped tar archive with fullchain.pem and privkey.pem correspond
 
 9. Add DNS A record to point from domain to VPS ip
 
+### Message for the graders
+
+Hi, for the deployment sprint, we have implemented both extra credit options. The continuous deployment works by having github fire off a webhook, when circleci says that the docker images have been built and pushed, to a express server that pulls the new images from docker hub and restarts the containers on the vps. To verify we have done so, you can look at the following files:
+
+- for Docker/containerization:
+```
+https://github.com/software-students-fall2021/project-setup-xinhua-coherent-compfood/blob/master/back-end/Dockerfile
+https://github.com/software-students-fall2021/project-setup-xinhua-coherent-compfood/blob/master/front-end/Dockerfile
+https://github.com/software-students-fall2021/project-setup-xinhua-coherent-compfood/blob/master/docker_build.sh
+```
+
+- for continuous deployment:
+```
+https://github.com/software-students-fall2021/project-setup-xinhua-coherent-compfood/blob/master/deploy_steps/webhook_server/server.js
+https://github.com/software-students-fall2021/project-setup-xinhua-coherent-compfood/blob/master/deploy_steps/webhook_server/redeploy_docker.sh
+https://github.com/software-students-fall2021/project-setup-xinhua-coherent-compfood/blob/master/docker_pull.sh
+https://github.com/software-students-fall2021/project-setup-xinhua-coherent-compfood/blob/master/docker_run.sh
+https://github.com/software-students-fall2021/project-setup-xinhua-coherent-compfood/blob/master/docker_stop.sh
+```
+
 # Testing
 
 ## Front-end
