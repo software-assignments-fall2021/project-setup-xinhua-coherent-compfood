@@ -1,5 +1,5 @@
 import React from 'react';
-//import config from "../config";
+import config from "../config";
 
 let UserProfile = (props) =>{
     /*let [userinfo, set_ = useState([]);
@@ -43,7 +43,7 @@ let UserProfile = (props) =>{
 */
     return(
         <div className="divcenter">
-            <img src="https://picsum.photos/200" alt="Placeholder profile"></img>
+            <img className="imgcenter" src={`${config.backend_base_url}/static/user_profile.jpg`} width="200" height="200" alt="Profile" />
             <h2>John Doe</h2>
             <p>Username/Email: qwert1234</p>
             <p>Phone Number: +1 (272) 272 2772</p>
