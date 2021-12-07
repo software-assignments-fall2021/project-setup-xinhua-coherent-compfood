@@ -1,37 +1,55 @@
-import {useState, useEffect} from "react";
-import {BrowserRouter, Switch, Route, Link} from "react-router-dom";
+import {BrowserRouter, Switch, Route} from "react-router-dom";
 
-import Delivery_app_screen from "./screen/Delivery_app_list";
-import Header from "./component/Header";
-import Menu_item_list_screen from "./screen/Menu_item_list";
-import Order_confirmation_screen from "./screen/Order_confirmation";
-import Restaurant_list_screen from "./screen/Restaurant_list";
+import DeliveryAppScreen from "./screen/DeliveryAppList";
+//import Header from "./component/Header";
+import MenuItemListScreen from "./screen/MenuItemList";
+import OrderConfirmationScreen from "./screen/OrderConfirmation";
+import RestaurantListScreen from "./screen/RestaurantList";
+import login from "./screen/signIn";
+import signup from "./screen/signUp";
+import SigninButton from "./component/signin_button";
+import SignupButton from "./component/signup_button";
+import Sidebar from "./component/Sidebar";
+import UserProfile from "./screen/UserProfile";
 
 import "./all.css";
 
 let App = (props) => {
 	return (
 		<div>
-			<Header />
-
+			{/*<Header />*/}
 			<BrowserRouter>
+				<Sidebar />
 				<Switch>
+					{
+					<Route path="/signup" component={signup} />
+					}
+					
 					{//list of menu items from restaurant chosen
 					}
-					<Route path="/restaurant/:order_id" component={Menu_item_list_screen} />
+					{				
+					<Route path="/login" component={login} />
+					}
+					<Route path="/restaurant/:order_id" component={MenuItemListScreen} />
 
 					{//list of delivery apps that can serve the order
 					}
-					<Route path="/delivery/:order_id" component={Delivery_app_screen} />
+					<Route path="/delivery/:order_id" component={DeliveryAppScreen} />
 
 					{//waiting for external delivery app to confirm the order
 					}
-					<Route path="/processing/:order_id" component={Order_confirmation_screen} />
+					<Route path="/processing/:order_id" component={OrderConfirmationScreen} />
+					{//User profile that you can view name, username, and profile picture.
+					}
+					<Route path="/user-profile" component={UserProfile} />
 
 					{//list of restaurants close to user
 					}
 					<Route path="/">
-						<Restaurant_list_screen />
+						<SigninButton />
+						<SignupButton />
+						<RestaurantListScreen />
+
 					</Route>
 				</Switch>
 			</BrowserRouter>

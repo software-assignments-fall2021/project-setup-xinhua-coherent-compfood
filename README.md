@@ -1,10 +1,12 @@
-# CompFood
+# CompFood (deployed at [https://swe474.xor.fyi](https://swe474.xor.fyi))
 
-## Vision
+## Badges
 
-## Statement
+CircleCI build: [![CircleCI badge](https://circleci.com/gh/software-students-fall2021/project-setup-xinhua-coherent-compfood/tree/master.svg?style=svg)](https://circleci.com/gh/software-students-fall2021/project-setup-xinhua-coherent-compfood/tree/master)
+
+## Vision Statement
+
 Our team is aiming for at minimum a functioning app that gathers prices from different meal delivery apps (data might be dummy data), displays different meal delivery options,redirecting the user to their preferred option.
-
 
 ## Themes
 
@@ -30,7 +32,7 @@ Our team is aiming for at minimum a functioning app that gathers prices from dif
 * We are all college students who use meal delivery apps and wanted a way to find the best prices
 * For collaboration https://github.com/software-students-fall2021/project-setup-xinhua-coherent-compfood/blob/master/CONTRIBUTING.md
 
-# Building (for development only)
+# Building (for development only, except for deploy)
 
 ## Front-end
 
@@ -54,7 +56,7 @@ npm install
 npm start
 ```
 
-## Back-end
+## Back-end + Database
 
 We are using `npm` as our package manager and Express as our framework. Steps to run:
 
@@ -70,15 +72,67 @@ cd back-end
 npm install
 ```
 
-3. launch Express server (accessable at [http://127.0.0.1:61001](http://127.0.0.1:61001))
+3. ensure that there is a `.env` file in the current working directory that looks like this with the appropriate values filled in
+
+```
+MONGO_DB_URL={url here}
+MONGO_DB_USERNAME={username here}
+MONGO_DB_PASSWORD={password here}
+
+JWT_SECRET={jwt secret here}
+```
+
+4. launch Express server (accessable at [http://127.0.0.1:61001](http://127.0.0.1:61001))
 
 ```
 npm start
 ```
 
-## Database/Deploy
+## Deploy
 
-* TBD
+1. Get a VPS with a Ubuntu 26.01 image
+
+2. Obtain the following files that will be necessary in later steps:
+
+```
+.env = (see backend and database steps)
+pm2.config.js = deploy_steps/webhook_server/pm2.config.js with placeholder values replaced
+certs.tar.gz = gzipped tar archive with fullchain.pem and privkey.pem corresponding to a valid SSL cert for the domain you are using
+```
+
+3. Replace `swe474.xor.fyi` with the domain name you are using in the nginx configs located in `deploy_steps/config`
+
+4. Run the script `deploy_steps/1.setup_ubuntu_21_06` as `root` on the VPS
+
+5. Run the script `deploy_steps/2.make_app_user` as `root` on the VPS
+
+6. Run the script `deploy_steps/3.pull_repo` as `app` on the VPS
+
+7. Run the script `deploy_steps/4.setup_nginx` as `root` on the VPS
+
+8. Trigger a build on CircleCI with passing docker job
+
+9. Add DNS A record to point from domain to VPS ip
+
+### Message for the graders
+
+Hi, for the deployment sprint, we have implemented both extra credit options. The continuous deployment works by having github fire off a webhook, when circleci says that the docker images have been built and pushed, to a express server that pulls the new images from docker hub and restarts the containers on the vps. To verify we have done so, you can look at the following files:
+
+- for Docker/containerization:
+```
+https://github.com/software-students-fall2021/project-setup-xinhua-coherent-compfood/blob/master/back-end/Dockerfile
+https://github.com/software-students-fall2021/project-setup-xinhua-coherent-compfood/blob/master/front-end/Dockerfile
+https://github.com/software-students-fall2021/project-setup-xinhua-coherent-compfood/blob/master/docker_build.sh
+```
+
+- for continuous deployment:
+```
+https://github.com/software-students-fall2021/project-setup-xinhua-coherent-compfood/blob/master/deploy_steps/webhook_server/server.js
+https://github.com/software-students-fall2021/project-setup-xinhua-coherent-compfood/blob/master/deploy_steps/webhook_server/redeploy_docker.sh
+https://github.com/software-students-fall2021/project-setup-xinhua-coherent-compfood/blob/master/docker_pull.sh
+https://github.com/software-students-fall2021/project-setup-xinhua-coherent-compfood/blob/master/docker_run.sh
+https://github.com/software-students-fall2021/project-setup-xinhua-coherent-compfood/blob/master/docker_stop.sh
+```
 
 # Testing
 
@@ -94,7 +148,7 @@ Steps to test:
 
 4. make sure everything looks ok and nothing seems "broken" in terms of css/styling
 
-## Back-end
+## Back-end + Database
 
 Steps to test:
 
@@ -104,9 +158,11 @@ Steps to test:
 
 3. run `npm run test-cov` in the back-end directory for code coverage (+ unit testing)
 
-## Database/Deploy
+## Deploy
 
-* TBD
+1. Go to `https://{the domain you are using here}`
+
+2. Test functionality as you would test the frontend
 
 # Links
 

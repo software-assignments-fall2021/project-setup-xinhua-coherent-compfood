@@ -1,0 +1,31 @@
+.sign-up-page-title {
+    padding: 20px;
+    font-size: 28px;
+    color: darkblue;
+}
+
+.username-box {
+    padding: 5px;
+}
+
+.username-box-outside-border {
+    padding: 5px;
+}
+
+.password-box {
+    padding: 5px;
+}
+
+.password-box-outside-border {
+    padding: 5px;
+}
+
+.signup-button {
+    color: lightblue;
+    background-color: darkblue;
+    width: 80px;
+}
+
+.signup-button-outside-border {
+    padding: 5px;
+}

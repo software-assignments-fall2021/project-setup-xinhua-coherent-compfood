@@ -7,8 +7,8 @@ let morgan = require("morgan");
 let config = require("./config");
 let jwt = require("./jwt");
 
-//db models
-let {User} = require("./db");
+//db models + objectid type
+let {App, Food, ObjectId, Order, Restaurant, User} = require("./db");
 
 //dotenv loading .env
 require("dotenv").config({
@@ -33,28 +33,6 @@ server.use((req, resp, next) => {
 
 //static directory is accessible as /static/ and loads files from ./public
 server.use("/static/", express.static("./public/"));
-
-//global variables
-
-//TODO make sure orders can only be accessed by the user who made them, when login gets implemented
-let next_order_id = 0;
-let orders = {};
-
-//this ^^^ should be avoided, but this is stopgap until mongoose -> mongodb atlas connection is made
-
-let gen_new_order = () => {
-	let order_id = next_order_id;
-	++next_order_id;
-
-	//MAGIC -1 for not defined yet
-	orders[order_id] = {
-		id: order_id,
-		restaurant_id: -1,
-		food_ids: [],
-		app_id: -1
-	};
-	return order_id;
-};
 
 server.get("/", (req, resp) => {
 	let data = {
@@ -154,25 +132,79 @@ server.get("/restaurants", async (req, resp) => {
 });
 
 server.post("/new_order", async (req, resp) => {
-	let data = gen_new_order();
+	let new_order = new Order({});
+	let id = (await new_order.save())._id;
+
+	let data = {
+		id: id.valueOf()
+	};
 
 	return resp.json(data);
 });
 
-server.get("/order/:order_id", async (req, resp) => {
-	let order_id = Number(req.params.order_id);
+//converts _id to string id and removes __v
+let process_mongoose_object = (obj) => {
+	//json dumping and loading to remove mongoose specific fields
+	return process_mongoose_object_helper(JSON.parse(JSON.stringify(obj)));
+};
 
-	let data;
+let process_mongoose_object_helper = (obj) => {
+	if (Array.isArray(obj)){
+		return obj.map((ele) => {
+			return process_mongoose_object(ele);
+		});
+	}
+	else if (typeof obj === "object"){
+		let ret = {};
 
-	if (orders.hasOwnProperty(order_id)){
-		data = orders[order_id];
+		for (let key of Object.keys(obj)){
+			if (!obj.hasOwnProperty(key)){
+				continue;
+			}
+
+			if (key === "_id"){
+				ret["id"] = obj[key].valueOf();
+			}
+			else if (key !== "__v"){
+				ret[key] = process_mongoose_object(obj[key]);
+			}
+		}
+
+		return ret;
 	}
 	else{
-		data = {"error": "Order not found"};
-		resp.statusCode = 404;
+		return obj;
+	}
+};
+
+server.get("/order/:order_id", async (req, resp) => {
+	let order_id = req.params.order_id;
+
+	//validate id format
+	if (!order_id.match(/^[0-9a-f]{24}$/)){
+		resp.statusCode = 400;
+		return resp.json({"error": "Invalid id format"});
 	}
 
-	return resp.json(data);
+	Order.findOne(
+		{_id: order_id},
+		async (err, data) => {
+			if (err || data === null){
+				data = {"error": "Order not found"};
+				resp.statusCode = 404;
+
+				return resp.json(data);
+			}
+
+			data = await data.populate("restaurant_id");
+			data = await data.populate("food_ids");
+			data = await data.populate("app_id");
+
+			data = process_mongoose_object(data);
+
+			return resp.json(data);
+		}
+	);
 });
 
 module.exports = server;

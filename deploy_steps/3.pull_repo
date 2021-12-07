@@ -1,0 +1,24 @@
+cd ~
+git clone https://github.com/software-students-fall2021/project-setup-xinhua-coherent-compfood repo
+cd repo
+
+#TODO remove this once this code gets merged into master
+git checkout ah-continuous-deployment
+
+#launch webhook server
+cd deploy_steps/webhook_server
+npm install
+
+read -p "sftp config file to pm2.config.js"
+if [[ ! -f ~/pm2.config.js ]]; then
+	exit 1
+fi
+mv ~/pm2.config.js ~/repo/deploy_steps/webhook_server/
+
+read -p "sftp .env file to .env"
+if [[ ! -f ~/.env ]]; then
+	exit 1
+fi
+mv ~/.env ~/repo/back-end/
+
+npm run start
