@@ -1,5 +1,6 @@
 import  React, { useState, useEffect } from 'react';
 import '../signUp.css';
+import axios from 'axios'
 const SignUp = () => {
     const [fname, setfname] = useState("initialState")
     const [lName, setlname] = useState("initialState")
@@ -14,6 +15,20 @@ const SignUp = () => {
           username: username,
           password: password
         };
+      axios({
+        url: 'http://localhost:61001/signup',
+        method: 'POST',
+        data: payload
+      })
+        .then(() => {
+          console.log('Data has been sent to the server');
+          this.resetUserInputs();
+          this.getBlogPost();
+        })
+        .catch(() => {
+          console.log('Internal server error');
+        });;
+  
     };
     
 
