@@ -1,6 +1,6 @@
 import React from 'react';
 import '../signIn.css';
-
+import axios from 'axios'
 const SignIn = () => {
     const handleSubmit = (event) => {
       event.preventDefault(); 
@@ -8,6 +8,19 @@ const SignIn = () => {
           username: username,
           password: password
         };
+        axios({
+          url: 'http://localhost:61001/login',
+          method: 'POST',
+          data: payload
+        })
+          .then(() => {
+            console.log('Data has been sent to the server');
+            this.resetUserInputs();
+            this.getBlogPost();
+          })
+          .catch(() => {
+            console.log('Internal server error');
+          });;  
     };
     return (
       <form onSubmit={handleSubmit}>
