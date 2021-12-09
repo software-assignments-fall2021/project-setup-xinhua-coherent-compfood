@@ -7,7 +7,13 @@ const SignUp = () => {
     const [password, setpassword] = useState("initialState")
     
     const handleSubmit = (event) => {
-  
+      event.preventDefault(); 
+      const payload = {
+          firt_name: fname,
+          last_name: lName,
+          username: username,
+          password: password
+        };
     };
     
 
