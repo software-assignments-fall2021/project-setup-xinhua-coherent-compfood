@@ -2,7 +2,15 @@ import React from 'react';
 import '../signIn.css';
 
 const SignIn = () => {
+    const handleSubmit = (event) => {
+      event.preventDefault(); 
+      const payload = {
+          username: username,
+          password: password
+        };
+    };
     return (
+      <form onSubmit={handleSubmit}>
       <div>
           <div className = "sign-in-page-title">
               Sign in Page
@@ -22,6 +30,7 @@ const SignIn = () => {
             <p>New to CompFood? <a href="/signup">Sign Up</a></p>
           </div>
       </div>
+      </form>
     );
 }
 
