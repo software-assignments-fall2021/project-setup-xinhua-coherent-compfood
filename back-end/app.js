@@ -3,7 +3,7 @@ let bcrypt = require("bcrypt");
 let express = require("express");
 let fs = require("fs/promises");
 let morgan = require("morgan");
-
+const cors = require('cors');
 let config = require("./config");
 let jwt = require("./jwt");
 
@@ -33,6 +33,7 @@ server.use((req, resp, next) => {
 
 //static directory is accessible as /static/ and loads files from ./public
 server.use("/static/", express.static("./public/"));
+server.use(cors());
 
 server.get("/", (req, resp) => {
 	let data = {
