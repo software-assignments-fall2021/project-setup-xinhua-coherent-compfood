@@ -1,7 +1,7 @@
 .sign-up-page-title {
     padding: 20px;
     font-size: 28px;
-    color: darkblue;
+    color: orange;
 }
 
 .username-box {
@@ -21,8 +21,8 @@
 }
 
 .signup-button {
-    color: lightblue;
-    background-color: darkblue;
+    color: rgb(0, 0, 0);
+    background-color: rgb(165, 165, 165);
     width: 80px;
 }
 
