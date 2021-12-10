@@ -2,7 +2,7 @@
 .sign-in-page-title {
     padding: 20px;
     font-size: 28px;
-    color: darkblue;
+    color: orange;
 }
 
 .username-box {
@@ -22,8 +22,8 @@
 }
 
 .login-button {
-    color: lightblue;
-    background-color: darkblue;
+    color: black;
+    background-color: rgb(167, 167, 167);
     width: 80px;
 }
 

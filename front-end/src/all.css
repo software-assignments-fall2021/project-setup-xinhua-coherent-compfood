@@ -1,9 +1,31 @@
-#root {
+:root {
     width: 90vw;
     padding: 0px 5vw;
+    --dark: rgb(43, 44, 49);
+    --light: rgb(255, 255, 255);
 }
+body {
+    font-family: "Ubuntu", sans-serif;
+    background: var(--background-color);
+    color: var(--text-color);
+    font-weight: var(--font-weight);
+  }
+  
+body.light {
+    --background-color: var(--light);
+    --text-color: var(--dark);
+    --font-weight: 400;
+  }
+  
+body.dark {
+    --background-color: var(--dark);
+    --text-color: var(--light);
+    --font-weight: 500;
+  }
+
 
 .p {
+    
     color: rgb(0, 0, 0);
     margin: 5px;
 }
@@ -24,7 +46,7 @@ div {
     /*
 	border: 0.5px solid rgb(255, 255, 255);
 	*/
-    background-color: rgb(255, 255, 255);
+    background-color: var(--background-color);
 }
 
 .prompt{
@@ -68,7 +90,7 @@ div {
     margin: 1em 0em;
     border: 1px black dashed;
     border-radius: 2em;
-    background-color: lightgray;
+    background-color: rgb(148, 148, 148);
 }
 
 .restaurant-card {
@@ -177,7 +199,7 @@ div {
 
 /*----------SIDEBAR STYLINGS----------*/
 .navbar {
-    background-color: white;
+    background-color: var(--background-color);
     height: 80px;
     display: flex;
     justify-content: flex-start;
@@ -311,3 +333,27 @@ span {
         padding: 20px;
         text-align: center;
     }
+
+
+    
+/*----------Toggle dark/light STYLINGS----------*/
+#darkMode {
+    background: transparent url("./moon.png") no-repeat center;
+    background-size: 30px 30px;
+    width: 45px;
+    height: 45px;
+    filter: grayscale(100%);
+    border: none;
+    border-radius: 50%;
+    transition: background-color 0.3s ease-in-out, filter 0.3s ease-in-out;
+    }
+    
+    #darkMode:hover{
+    filter: none;
+    background-color: black;
+    cursor: pointer;
+    }
+    
+    
+  
+/*------------------------------------*/
