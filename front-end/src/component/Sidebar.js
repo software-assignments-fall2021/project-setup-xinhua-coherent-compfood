@@ -27,7 +27,7 @@ function Navbar() {
                     </Link>
                     {/*CompFood Logo that directs to Home*/}
                     <Link to='/home' className='menu-bars'>
-                        <img className="imgcenter" src="logo.png" alt="Home Logo"  />
+                        <img className="imgcenter" src="/Logo.png" alt="Home Logo"  />
                     </Link>
                     {/*Dark/Light mode button*/}
                     <Link to='#' className='menu-bars'>
