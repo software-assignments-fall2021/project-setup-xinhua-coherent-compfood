@@ -2,6 +2,8 @@ import React from 'react';
 import '../signIn.css';
 import axios from 'axios'
 const SignIn = () => {
+    const [username, setusername] = useState("initialState")
+    const [password, setpassword] = useState("initialState")
     const handleSubmit = (event) => {
       event.preventDefault(); 
       const payload = {

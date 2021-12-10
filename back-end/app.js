@@ -96,7 +96,7 @@ server.post("/signup", (req, resp) => {
 server.post("/login", (req, resp) => {
 	let username = req.body.username ?? "";
 	let password = req.body.password ?? "";
-
+	console.log("login body", req.body)
 	User.findOne(
 		{username},
 		(err, data) => {
