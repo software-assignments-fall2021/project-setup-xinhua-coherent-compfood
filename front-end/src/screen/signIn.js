@@ -1,9 +1,17 @@
 import {React, useState} from 'react';
+import { useHistory } from "react-router-dom";
 import '../signIn.css';
 import axios from 'axios'
 const SignIn = () => {
     const [username, setusername] = useState("initialState")
     const [password, setpassword] = useState("initialState")
+
+    const history = useHistory();
+
+    const routeChange = () =>{ 
+      let path = `http://localhost:61001/login`; 
+      history.push(path);
+    }
     const handleSubmit = (event) => {
       event.preventDefault(); 
       const payload = {
@@ -46,7 +54,7 @@ const SignIn = () => {
             />
           </div>
           <div className = "login-button-outside-border">
-              <button className = "login-button">
+              <button className = "login-button" onClick={routeChange}>
                   Sign in
               </button>
           </div>
