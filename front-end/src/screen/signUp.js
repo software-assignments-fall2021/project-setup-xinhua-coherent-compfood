@@ -1,4 +1,4 @@
-import  React, { useState, useEffect } from 'react';
+import  React, { useState } from 'react';
 import '../signUp.css';
 import axios from 'axios'
 const SignUp = () => {
@@ -6,7 +6,7 @@ const SignUp = () => {
     const [lName, setlname] = useState("initialState")
     const [username, setusername] = useState("initialState")
     const [password, setpassword] = useState("initialState")
-    
+
     const handleSubmit = (event) => {
       event.preventDefault(); 
       const payload = {
@@ -31,9 +31,6 @@ const SignUp = () => {
   
     };
     
-
-   
-
     return (
       <form onSubmit={handleSubmit}>
       <div>
@@ -68,12 +65,10 @@ const SignUp = () => {
               }}  
             
             />
-                { console.log("ok", fname)  } 
-                {console.log("hi")}
           </div>
 
           <div className = "signup-button-outside-border">
-              <button className = "signup-button">
+              <button className = "signup-button" >
                   Sign up
               </button>
           </div>
