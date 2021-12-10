@@ -10,7 +10,7 @@ const SignUp = () => {
     const handleSubmit = (event) => {
       event.preventDefault(); 
       const payload = {
-          firt_name: fname,
+          first_name: fname,
           last_name: lName,
           username: username,
           password: password

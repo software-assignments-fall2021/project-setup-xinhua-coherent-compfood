@@ -58,7 +58,7 @@ server.post("/signup", (req, resp) => {
 	let password = req.body.password ?? "";
 	let first_name = req.body.first_name ?? "";
 	let last_name = req.body.last_name ?? "";
-	console.log("body", req.body)
+
 	//check non-empty username and password
 	//MAGIC minimum password length is 10
 	if (username === "" || password.length < 10){
@@ -66,6 +66,7 @@ server.post("/signup", (req, resp) => {
 	}
 
 	User.findOne(
+
 		{username},
 		(err, data) => {
 			if (err){
@@ -87,7 +88,6 @@ server.post("/signup", (req, resp) => {
 				last_name
 			});
 			new_user.save();
-
 			return resp.json({message: "Signup successful"});
 		}
 	);
