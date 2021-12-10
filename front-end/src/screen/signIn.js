@@ -1,4 +1,4 @@
-import React from 'react';
+import {React, useState} from 'react';
 import '../signIn.css';
 import axios from 'axios'
 const SignIn = () => {
@@ -31,10 +31,19 @@ const SignIn = () => {
               Sign in Page
           </div>
           <div className = "username-box-outside-border">
-            <input type = "text" className = "username-box" placeholder = "username..."/>
+            <input type = "text" className = "username-box" placeholder = "username..."
+              onChange = {(event) => {
+                setusername(event.target.value)
+              }}
+            
+            />
           </div>
           <div className = "password-box-outside-border">
-            <input type = "text" className = "password-box" placeholder = "password..."/>
+            <input type = "text" className = "password-box" placeholder = "password..."
+              onChange = {(event) => {
+                setpassword(event.target.value)
+              }}
+            />
           </div>
           <div className = "login-button-outside-border">
               <button className = "login-button">
