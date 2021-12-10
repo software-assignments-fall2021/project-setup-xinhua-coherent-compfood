@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
 import { IconContext } from 'react-icons';
-import darkmode from "./darkmode.js";
 import { Link } from 'react-router-dom';
 import { SidebarData } from './SidebarData';
 
