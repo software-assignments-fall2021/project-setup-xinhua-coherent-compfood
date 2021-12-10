@@ -3,14 +3,15 @@ import React, { useState } from 'react';
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
 import { IconContext } from 'react-icons';
-
 import { Link } from 'react-router-dom';
 import { SidebarData } from './SidebarData';
 
 import '.././all.css';
+import DarkMode from './darkmode.js';
 
 function Navbar() {
     const [sidebar, setSidebar] = useState(false);
+    //const[dark, setDark] = useState(false);
     //Simple function to turn sidebar on if off, off if on, when called
     const showSidebar = () => setSidebar(!sidebar);
 
@@ -26,11 +27,11 @@ function Navbar() {
                     </Link>
                     {/*CompFood Logo that directs to Home*/}
                     <Link to='/home' className='menu-bars'>
-                        <img className="imgcenter" src="/Logo.png" alt="Home Logo"  />
+                        <img className="imgcenter" src="logo.png" alt="Home Logo"  />
                     </Link>
                     {/*Dark/Light mode button*/}
                     <Link to='#' className='menu-bars'>
-                        <button onClick={clickMe} type="button" className="button">Dark/Light Mode</button>
+                        <DarkMode/>
                     </Link>
                 </div>
                 
@@ -61,17 +62,5 @@ function Navbar() {
         </>
     );
 }
-//Copy-pasted function for the light/dark mode that was previously in header
-let mode = 'light';
 
-function clickMe(){
-	if(mode === 'light'){
-		mode = 'dark';
-	}
-	else{
-		mode = 'light';
-	}
-	
-	console.log(mode);
-}
 export default Navbar;
