@@ -5,17 +5,18 @@ import '../all.css';
 let About = (props) =>{
     
     return(
-        <div className="App">
+        <div className="About">
         <h1>About Us</h1>
         <div id="image"></div>
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum eget
-            scelerisque neque, quis scelerisque erat. Quisque venenatis molestie
-            sapien, dapibus viverra nulla hendrerit eget. Pellentesque egestas
-            ultrices accumsan. Ut ac magna vel ex maximus ultricies. Nulla facilisi.
-            Suspendisse gravida sem eu odio mattis ullamcorper. Curabitur feugiat
-            ipsum vel vulputate ultricies.
-        </p>
+
+        <h2>The Team</h2>
+            <ul>
+                <li>Ryeem Zia <a href="https://github.com/RyeemZia">https://github.com/RyeemZia</a></li>
+                <li>Andy Huang <a href="https://github.com/huang-a">https://github.com/huang-a</a></li>
+                <li>Minsu Seo<a href="https://github.com/seocahtoa">https://github.com/seocahtoa</a></li>
+                <li>Ermias Berhane Merine <a href="https://github.com/ErmiasMerine">https://github.com/ErmiasMerine</a></li>
+                <li>Philip Chae<a href="https://github.com/phillip-chae">https://github.com/phillip-chae</a></li>
+            </ul>
         
     </div>
     );
