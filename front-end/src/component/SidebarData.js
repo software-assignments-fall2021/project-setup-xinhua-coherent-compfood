@@ -27,5 +27,11 @@ export const SidebarData = [
         path: '/',
         icon: <AiIcons.AiOutlineHome />,
         cName: 'nav-text'
+    },
+    {
+        title: 'About',
+        path: '/about',
+        icon: <AiIcons.AiFillInfoCircle/>,
+        cName: 'nav-text'
     }
 ]
