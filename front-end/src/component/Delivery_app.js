@@ -2,8 +2,9 @@ import "../all.css";
 
 let Delivery_app = (props) => {
 	let get_order_id = () => {
-		//TODO actually get the id from the url path
-		return "test_order_id";
+		let match = document.location.href.match(/\/([0-9a-f]{24})$/);
+
+		return match === null ? "" : match[1];
 	};
 
 	return (

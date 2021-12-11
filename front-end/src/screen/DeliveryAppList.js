@@ -5,20 +5,18 @@ import config from "../config";
 import DeliveryApp from "../component/Delivery_app";
 
 let Delivery_app_list = (props) => {
-	//MAGIC 5 delivery apps
-	
 	let [delivery_apps, set_delivery_apps] = useState([]);
 
 	useEffect(
 		() => {
-			axios(`${config.backend_base_url}/apps?rows=5`)
+			axios(`${config.backend_base_url}/apps/${get_order_id()}`)
 				.then((resp) => {
 					let data = resp.data;
 					let temp = [];
 
 					for (let it of data){
 						console.log(it);
-						temp.push(<DeliveryApp name={it.name} price={it.price} time={it.time} />);
+						temp.push(<DeliveryApp key={it.id} name={it.name} price={it.price} time={it.time} />);
 					}
 					set_delivery_apps(temp);
 				})
@@ -29,6 +27,12 @@ let Delivery_app_list = (props) => {
 		},
 		[]
 	);
+
+	let get_order_id = () => {
+		let match = document.location.href.match(/\/([0-9a-f]{24})$/);
+
+		return match === null ? "" : match[1];
+	};
 
 	return (
 		<div>
