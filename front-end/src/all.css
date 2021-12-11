@@ -366,5 +366,5 @@ span {
     background-repeat: no-repeat;
     background-size: cover;
     transition: background-image 0.7s ease-in-out;
-    background-image: var(--image);
+    background-image: url("./food.jpeg");
   }
