@@ -11,7 +11,7 @@ import SigninButton from "./component/signin_button";
 import SignupButton from "./component/signup_button";
 import Sidebar from "./component/Sidebar";
 import UserProfile from "./screen/UserProfile";
-
+import about from "./screen/about"
 import "./all.css";
 
 let App = (props) => {
@@ -23,6 +23,9 @@ let App = (props) => {
 				<Switch>
 					{
 					<Route path="/signup" component={signup} />
+					}
+					{
+					<Route path="/about" component={about} />
 					}
 					
 					{//list of menu items from restaurant chosen
