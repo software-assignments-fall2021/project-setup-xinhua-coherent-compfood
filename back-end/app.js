@@ -28,11 +28,17 @@ server.use(jwt.middleware);
 //add cors allow origin header before response is set
 server.use((req, resp, next) => {
 	resp.set("Access-Control-Allow-Origin", config.frontend_base_url);
+	resp.set("Access-Control-Allow-Headers", "Content-Type,Content-Length");
+	resp.set("Access-Control-Allow-Methods", "GET,POST");
 	next();
 });
 
 //static directory is accessible as /static/ and loads files from ./public
 server.use("/static/", express.static("./public/"));
+
+server.options("/*", (req, resp) => {
+	resp.json({});
+});
 
 server.get("/", (req, resp) => {
 	let data = {
@@ -113,22 +119,116 @@ server.post("/login", (req, resp) => {
 	);
 });
 
-server.get("/apps", async (req, resp) => {
-	let data = JSON.parse(await fs.readFile("./data/new_apps"));
+server.get("/apps/:order_id", async (req, resp) => {
+	let order_id = req.params.order_id;
 
-	return resp.json(data);
+	//validate id format
+	if (!order_id.match(/^[0-9a-f]{24}$/)){
+		resp.statusCode = 400;
+		return resp.json({"error": "Invalid id format"});
+	}
+
+	Order.findOne(
+		{_id: order_id},
+		async (err, data) => {
+			if (err || data === null){
+				data = {"error": "Order not found"};
+				resp.statusCode = 404;
+
+				return resp.json(data);
+			}
+
+			data = await data.populate("food_ids");
+			data = data["food_ids"];
+
+			let item_count = data.length;
+			let subtotal = data.reduce(
+				(accum, next) => {
+					return accum + Number(next.price);
+				},
+				0
+			);
+
+			App.find(
+				{},
+				async (err, data) => {
+					if (err || data === null){
+						data = {"error": "App not found"};
+						resp.statusCode = 404;
+
+						return resp.json(data);
+					}
+
+					data = process_mongoose_object(data);
+
+					//MAGIC dummy data
+					for (let ele of data){
+						ele["price"] = `$${(ele.price * (subtotal + 2.1)).toFixed(2)}`;
+						ele["time"] = `${(ele.time * 8 + item_count * 0.2 + 1).toFixed(2)} min`;
+					}
+
+					return resp.json(data);
+				}
+			);
+		}
+	);
 });
 
-server.get("/foods", async (req, resp) => {
-	let data = JSON.parse(await fs.readFile("./data/new_foods"));
+server.get("/foods/:order_id", async (req, resp) => {
+	let order_id = req.params.order_id;
 
-	return resp.json(data);
+	//validate id format
+	if (!order_id.match(/^[0-9a-f]{24}$/)){
+		resp.statusCode = 400;
+		return resp.json({"error": "Invalid id format"});
+	}
+
+	Order.findOne(
+		{_id: order_id},
+		async (err, data) => {
+			if (err || data === null){
+				data = {"error": "Order not found"};
+				resp.statusCode = 404;
+
+				return resp.json(data);
+			}
+
+			let restaurant_id = data.restaurant_id.length ? data.restaurant_id[0] : "";
+
+			Restaurant.findOne(
+				{_id: restaurant_id},
+				async (err, data) => {
+					if (err || data === null){
+						data = {"error": "Restaurant not found"};
+						resp.statusCode = 404;
+
+						return resp.json(data);
+					}
+
+					data = await data.populate("menu");
+
+					data = process_mongoose_object(data["menu"]);
+
+					return resp.json(data);
+				}
+			);
+		}
+	);
 });
 
 server.get("/restaurants", async (req, resp) => {
-	let data = JSON.parse(await fs.readFile("./data/new_restaurants"));
+	Restaurant.find(
+		{},
+		(err, data) => {
+			if (err || data === null){
+				return resp.json({error: "Server error"});
+			}
 
-	return resp.json(data);
+			data = process_mongoose_object(data);
+
+			return resp.json(data);
+		}
+	);
 });
 
 server.post("/new_order", async (req, resp) => {
@@ -140,6 +240,134 @@ server.post("/new_order", async (req, resp) => {
 	};
 
 	return resp.json(data);
+});
+
+let id_validator = (id) => {
+	return typeof id === "string" && id.match(/^[0-9a-f]{24}$/);
+};
+
+server.post("/set_order/:order_id", async (req, resp) => {
+	let order_id = req.params.order_id;
+
+	//validate id format
+	if (!order_id.match(/^[0-9a-f]{24}$/)){
+		resp.statusCode = 400;
+		return resp.json({"error": "Invalid id format"});
+	}
+
+	Order.findOne(
+		{_id: order_id},
+		async (err, data) => {
+			if (err || data === null){
+				data = {"error": "Order not found"};
+				resp.statusCode = 404;
+
+				return resp.json(data);
+			}
+
+			let keys = Object.keys(req.body).filter((ele) => {
+				return req.body.hasOwnProperty(ele);
+			});
+
+			if (keys.indexOf("restaurant") != -1){
+				let restaurant_id = req.body["restaurant"];
+
+				if (!id_validator(restaurant_id)){
+					resp.statusCode = 400;
+					return resp.json({"error": "Invalid id format"});
+				}
+
+				Restaurant.findOne(
+					{_id: restaurant_id},
+					async (err, data) => {
+						if (err || data === null){
+							data = {"error": "Restaurant not found"};
+							resp.statusCode = 404;
+
+							return resp.json(data);
+						}
+
+						let new_data = await Order.findOneAndUpdate(
+							{_id: order_id},
+							{"restaurant_id": [restaurant_id]},
+							{"new": true}
+						).exec();
+
+						new_data = process_mongoose_object(new_data);
+
+						return resp.json(new_data);
+					}
+				);
+			}
+			//TODO no check if foods entered belong to restaurant of the order
+			else if (keys.indexOf("foods") != -1){
+				let food_ids = req.body["foods"];
+
+				if (!Array.isArray(food_ids) || food_ids.some((ele) => {return !id_validator(ele);})){
+					resp.statusCode = 400;
+					return resp.json({"error": "Invalid id format"});
+				}
+
+				Food.find(
+					{_id: food_ids},
+					async (err, data) => {
+						if (err || data === null || data.length !== food_ids.length){
+							data = {"error": "Food(s) not found"};
+							resp.statusCode = 404;
+
+							return resp.json(data);
+						}
+
+						let new_data = await Order.findOneAndUpdate(
+							{_id: order_id},
+							{"food_ids": [food_ids]},
+							{"new": true}
+						).exec();
+
+						new_data = process_mongoose_object(new_data);
+
+						return resp.json(new_data);
+					}
+				);
+			}
+			else if (keys.indexOf("app") != -1){
+				let app_id = req.body["app"];
+
+				if (!id_validator(app_id)){
+					resp.statusCode = 400;
+					return resp.json({"error": "Invalid id format"});
+				}
+
+				App.findOne(
+					{_id: app_id},
+					async (err, data) => {
+						if (err || data === null){
+							data = {"error": "App not found"};
+							resp.statusCode = 404;
+
+							return resp.json(data);
+						}
+
+						let new_data = await Order.findOneAndUpdate(
+							{_id: order_id},
+							{"app_id": [app_id]},
+							{"new": true}
+						).exec();
+
+						new_data = process_mongoose_object(new_data);
+
+						return resp.json(new_data);
+					}
+				);
+			}
+			else{
+				data = {"error": "Invalid body"};
+				resp.statusCode = 400;
+
+				return resp.json(data);
+			}
+		}
+	);
 });
 
 //converts _id to string id and removes __v

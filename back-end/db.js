@@ -7,7 +7,11 @@ require("dotenv").config({
 });
 
 const App = new mongoose.Schema({
-	name: { type: String, default: null }
+	name: { type: String, default: null },
+	//multiplier
+	price: { type: Number, default: 1.0 },
+	//multiplier
+	time: { type: Number, default: 1.0 }
 });
 
 const Order = new mongoose.Schema({
@@ -23,16 +27,22 @@ const User = new mongoose.Schema({
 	last_name: { type: String, default: null },
 	username: { type: String, unique: true },
 	password: { type: String },
+	order_ids: [{ type: mongoose.ObjectId, ref: "Order" }]
 });
 
 const Food = new mongoose.Schema({
 	name: { type: String, default: null },
-	price: { type: Number, default: 0 },
+	description: { type: String, default: null },
+	price: { type: String, default: 0 }
 });
 
 const Restaurant = new mongoose.Schema({
 	name: { type: String, default: null },
-	menu: [Food]
+	description: { type: String, default: null },
+	hour_start: { type: String, default: null },
+	hour_end: { type: String, default: null },
+	location: { type: String, default: null },
+	menu: [{ type: mongoose.ObjectId, ref: "Food" }]
 });
 
 
