@@ -1,5 +1,6 @@
 let {assert, request_factory} = require("../request");
 
+/*
 describe("/apps endpoint", () => {
 	let server;
 	let request;
@@ -32,4 +33,4 @@ describe("/apps endpoint", () => {
 		}
 	});
 });
-
+*/

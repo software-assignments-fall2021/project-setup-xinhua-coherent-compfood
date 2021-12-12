@@ -5,20 +5,18 @@ import config from "../config";
 import Restaurant from "../component/Restaurant";
 
 let RestaurantList = (props) => {
-	//MAGIC 10-12 restaurants
-
 	let [restaurants, set_restaurants] = useState([]);
 
 	useEffect(
 		() => {
-			axios(`${config.backend_base_url}/restaurants?rows=`+ 10 + Math.floor(Math.random() * 3))
+			axios(`${config.backend_base_url}/restaurants`)
 				.then((resp) => {
 					let data = resp.data;
 					let temp = [];
 
 					for (let it of data){
 						console.log(it);
-						temp.push(<Restaurant name={it.name} description={it.description} hours={`${it.hour_start} - ${it.hour_end}`} location={it.location} />);
+						temp.push(<Restaurant key={it.id} id={it.id} name={it.name} description={it.description} hours={`${it.hour_start} - ${it.hour_end}`} location={it.location} />);
 					}
 					set_restaurants(temp);
 				})

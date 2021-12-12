@@ -12,7 +12,7 @@ let Menu_item = (props) => {
 
 	return (
 		<div>
-			<input className="proxy-select" type="checkbox" />
+			<input className="proxy-select" type="checkbox" data-id={props.id} />
 			<div className="boxify proxy-item" onClick={click_handler}>
 				<div className="menu-item-card">
 					<div>
