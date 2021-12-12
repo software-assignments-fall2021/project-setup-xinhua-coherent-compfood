@@ -16,7 +16,7 @@ let Delivery_app_list = (props) => {
 
 					for (let it of data){
 						console.log(it);
-						temp.push(<DeliveryApp key={it.id} name={it.name} price={it.price} time={it.time} />);
+						temp.push(<DeliveryApp key={it.id} id={it.id} name={it.name} price={it.price} time={it.time} />);
 					}
 					set_delivery_apps(temp);
 				})

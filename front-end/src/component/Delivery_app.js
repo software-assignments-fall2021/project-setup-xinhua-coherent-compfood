@@ -1,3 +1,7 @@
+import axios from "axios";
+
+import config from "../config";
+
 import "../all.css";
 
 let Delivery_app = (props) => {
@@ -7,12 +11,29 @@ let Delivery_app = (props) => {
 		return match === null ? "" : match[1];
 	};
 
+	let set_app = async () => {
+		axios(`${config.backend_base_url}/set_order/${get_order_id()}`, {
+				method: "POST",
+				data: {
+					app: props.id
+				}
+			})
+			.then((resp) => {
+				document.location.href = `/processing/${get_order_id()}`;
+			})
+			.catch((ex) => {
+				alert(`Something went wrong!: ${ex}`);
+			})
+		;
+	};
+
+
 	return (
 		<div className="boxify">
 			<div className="delivery-app-card">
 				<div>
 					<p className="p">{props.name}</p>
-					<a className="go" href={`/processing/${get_order_id()}`}>ORDER</a>
+					<a className="go" onClick={set_app}>ORDER</a>
 					<p className="p">Subtotal: {props.price}</p>
 					<p className="p">Arriving in: {props.time}</p>
 				</div>

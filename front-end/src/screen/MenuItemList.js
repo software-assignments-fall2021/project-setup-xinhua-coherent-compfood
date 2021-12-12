@@ -34,11 +34,36 @@ let MenuItemList = (props) => {
 		return match === null ? "" : match[1];
 	};
 
+	let set_foods = async () => {
+		let data = Array.from(document.querySelectorAll("input.proxy-select"))
+			.filter((ele) => {
+				return ele.checked;
+			})
+			.map((ele) => {
+				return ele.dataset.id;
+			})
+		;
+
+		axios(`${config.backend_base_url}/set_order/${get_order_id()}`, {
+				method: "POST",
+				data: {
+					foods: data
+				}
+			})
+			.then((resp) => {
+				document.location.href = `/delivery/${get_order_id()}`;
+			})
+			.catch((ex) => {
+				alert(`Something went wrong!: ${ex}`);
+			})
+		;
+	};
+
 	return (
 		<div>
 		<h2>Menu</h2>
 		{menu_items}
-		<a href={`/delivery/${get_order_id()}`}><button>FIND DELIVERY OPTIONS</button></a>
+		<a onClick={set_foods}><button>FIND DELIVERY OPTIONS</button></a>
 		</div>
 	);
 };
