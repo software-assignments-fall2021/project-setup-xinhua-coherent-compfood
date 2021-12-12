@@ -42,7 +42,15 @@ let verifier = (jwt, done) => {
 
 passport.use(new passport_jwt.Strategy(jwt_options, verifier));
 
-let require_login = () => {
+let require_login = (optional_str) => {
+	if (optional_str === "optional"){
+		return (req, resp, next) => {
+			if (req.get("Authorization")){
+				return passport.authenticate("jwt", {session: false})(req, resp, next);
+			}
+			next();
+		};
+	}
 	return passport.authenticate("jwt", {session: false});
 };
 
