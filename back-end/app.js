@@ -40,12 +40,16 @@ server.options("/*", (req, resp) => {
 	resp.json({});
 });
 
-server.get("/", (req, resp) => {
+server.get("/", jwt.require_login("optional"), (req, resp) => {
 	let data = {
 		"working": true,
 		"fully_functional": false,
 		"class_num": 474
 	};
+
+	if (req.user !== undefined){
+		console.log(`${req.user.username} is logged in!`);
+	}
 
 	return resp.json(data);
 });
@@ -246,7 +250,7 @@ let id_validator = (id) => {
 	return typeof id === "string" && id.match(/^[0-9a-f]{24}$/);
 };
 
-server.post("/set_order/:order_id", async (req, resp) => {
+server.post("/set_order/:order_id", jwt.require_login("optional"), async (req, resp) => {
 	let order_id = req.params.order_id;
 
 	//validate id format
@@ -320,7 +324,7 @@ server.post("/set_order/:order_id", async (req, resp) => {
 
 						let new_data = await Order.findOneAndUpdate(
 							{_id: order_id},
-							{"food_ids": [food_ids]},
+							{"food_ids": food_ids},
 							{"new": true}
 						).exec();
 
@@ -355,6 +359,12 @@ server.post("/set_order/:order_id", async (req, resp) => {
 						).exec();
 
 						new_data = process_mongoose_object(new_data);
+
+						//save to previous orders if user logged in
+						if (req.user !== undefined){
+							req.user.order_ids.push(order_id);
+							await req.user.save();
+						}
 
 						return resp.json(new_data);
 					}
