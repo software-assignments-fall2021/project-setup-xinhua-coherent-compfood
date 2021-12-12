@@ -16,7 +16,7 @@ const SignUp = () => {
           password: password
         };
       axios({
-        url: 'http://localhost:61001/signup',
+        url: 'http://127.0.0.1:61001/signup',
         method: 'POST',
         data: payload
       })
