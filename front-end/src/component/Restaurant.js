@@ -28,18 +28,12 @@ let Restaurant = (props) => {
 		;
 	};
 
-	let get_order_id = () => {
-		let match = document.location.href.match(/\/([0-9a-f]{24})$/);
-
-		return match === null ? "" : match[1];
-	};
-
 	return (
 		<div className="boxify">
 			<div className="restaurant-card">
 				<div>
 					<p className="p">{props.name}</p>
-					<a className="go" onClick={generate_order_id}>GO</a>
+					<p className="go" onClick={generate_order_id}>GO</p>
 					<p className="p">{props.description}</p>
 					<p className="p">Open: {props.hours}</p>
 					<p className="p">Location: {props.location}</p>

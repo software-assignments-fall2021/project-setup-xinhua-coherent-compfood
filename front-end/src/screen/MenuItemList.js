@@ -63,7 +63,7 @@ let MenuItemList = (props) => {
 		<div>
 		<h2>Menu</h2>
 		{menu_items}
-		<a onClick={set_foods}><button>FIND DELIVERY OPTIONS</button></a>
+		<p onClick={set_foods}><button>FIND DELIVERY OPTIONS</button></p>
 		</div>
 	);
 };

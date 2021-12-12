@@ -33,7 +33,7 @@ let Delivery_app = (props) => {
 			<div className="delivery-app-card">
 				<div>
 					<p className="p">{props.name}</p>
-					<a className="go" onClick={set_app}>ORDER</a>
+					<p className="go" onClick={set_app}>ORDER</p>
 					<p className="p">Subtotal: {props.price}</p>
 					<p className="p">Arriving in: {props.time}</p>
 				</div>
