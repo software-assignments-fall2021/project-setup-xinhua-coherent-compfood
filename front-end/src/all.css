@@ -334,6 +334,13 @@ span {
         text-align: center;
     }
 
+.boxify2 {
+    padding: 1.5em;
+    margin: 1em 0em;
+    border-radius: 2em;
+    background-color: rgb(216, 216, 216);
+}
+
 
     
 /*----------Toggle dark/light STYLINGS----------*/
