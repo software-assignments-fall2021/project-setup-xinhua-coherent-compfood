@@ -42,14 +42,12 @@ let UserProfile = (props) =>{
         })}
 */
     return(
-        <div className="divcenter boxify2">
+        <div className="divcenter">
             <img className="imgcenter" src={`${config.backend_base_url}/static/user_profile.jpg`} width="200" height="200" alt="Profile" />
             <h2>John Doe</h2>
-            <h3>Username/Email:</h3><p>qwert1234</p>
-            <h3>Phone Number: </h3>
-            <p>+1 (272) 272 2772</p>
-            <h3>Address: </h3>
-            <p>214 Joshington Pl, New York, NY 10001</p>
+            <p>Username/Email: qwert1234</p>
+            <p>Phone Number: +1 (272) 272 2772</p>
+            <p>Address: 214 Joshington Pl, New York, NY 10001</p>
         </div>
     );
 }
