@@ -3,7 +3,7 @@ let bcrypt = require("bcrypt");
 let express = require("express");
 let fs = require("fs/promises");
 let morgan = require("morgan");
-
+const cors = require('cors');
 let config = require("./config");
 let jwt = require("./jwt");
 
@@ -35,6 +35,7 @@ server.use((req, resp, next) => {
 
 //static directory is accessible as /static/ and loads files from ./public
 server.use("/static/", express.static("./public/"));
+server.use(cors());
 
 server.options("/*", (req, resp) => {
 	resp.json({});
@@ -67,7 +68,6 @@ server.post("/signup", (req, resp) => {
 	let password = req.body.password ?? "";
 	let first_name = req.body.first_name ?? "";
 	let last_name = req.body.last_name ?? "";
-
 	//check non-empty username and password
 	//MAGIC minimum password length is 10
 	if (username === "" || password.length < 10){
@@ -75,6 +75,7 @@ server.post("/signup", (req, resp) => {
 	}
 
 	User.findOne(
+
 		{username},
 		(err, data) => {
 			if (err){
@@ -96,7 +97,6 @@ server.post("/signup", (req, resp) => {
 				last_name
 			});
 			new_user.save();
-
 			return resp.json({message: "Signup successful"});
 		}
 	);
@@ -105,7 +105,6 @@ server.post("/signup", (req, resp) => {
 server.post("/login", (req, resp) => {
 	let username = req.body.username ?? "";
 	let password = req.body.password ?? "";
-
 	User.findOne(
 		{username},
 		(err, data) => {
