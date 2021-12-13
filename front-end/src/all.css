@@ -207,7 +207,7 @@ div {
 }
 
 .menu-bars {
-    margin-left: 2rem;
+    margin-right: 2rem;
     font-size: 2rem;
     background: none;
 }
@@ -333,6 +333,13 @@ span {
         padding: 20px;
         text-align: center;
     }
+
+.boxify2 {
+    padding: 1.5em;
+    margin: 1em 0em;
+    border-radius: 2em;
+    background-color: rgb(231, 229, 229);
+}
 
 
     
