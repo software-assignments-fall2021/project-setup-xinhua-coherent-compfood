@@ -1,6 +1,8 @@
 import  React, { useState } from 'react';
 import '../signUp.css';
 import axios from 'axios'
+import config from '../config.js'
+
 const SignUp = () => {
     const [fname, setfname] = useState("initialState")
     const [lName, setlname] = useState("initialState")
@@ -16,14 +18,12 @@ const SignUp = () => {
           password: password
         };
       axios({
-        url: 'http://127.0.0.1:61001/signup',
+        url: `${config.backend_base_url}/signup`,
         method: 'POST',
         data: payload
       })
         .then(() => {
           console.log('Data has been sent to the server');
-          this.resetUserInputs();
-          this.getBlogPost();
         })
         .catch(() => {
           console.log('Internal server error');

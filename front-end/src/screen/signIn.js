@@ -1,10 +1,10 @@
 import {React, useState} from 'react';
 import '../signIn.css';
 import axios from 'axios'
+import config from '../config.js'
 const SignIn = () => {
     const [username, setusername] = useState("initialState")
     const [password, setpassword] = useState("initialState")
-
     const handleSubmit = (event) => {
       event.preventDefault(); 
       const payload = {
@@ -12,14 +12,12 @@ const SignIn = () => {
           password: password
         };
         axios({
-          url: 'http://127.0.0.1:61001/login',
+          url: `${config.backend_base_url}/login`,
           method: 'POST',
           data: payload
         })
           .then(() => {
             console.log('Data has been sent to the server');
-            this.resetUserInputs();
-            this.getBlogPost();
           })
           .catch(() => {
             console.log('Internal server error');
